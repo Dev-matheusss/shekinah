@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "682458807794",
+    "project_id": "shekinah-e6c9c",
+    "storage_bucket": "shekinah-e6c9c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682458807794:android:f08c96e83cb18cce10ff6b",
+        "android_client_info": {
+          "package_name": "com.example.shekinah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRgdKrRBtl0qD2y9ExtrFpA9Fviy6QAqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

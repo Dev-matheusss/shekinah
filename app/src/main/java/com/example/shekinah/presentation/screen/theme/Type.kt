@@ -1,4 +1,4 @@
-package com.example.shekinah.presentation.ui.theme
+package com.example.shekinah.presentation.screen.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,5 +1,4 @@
-package com.example.shekinah.presentation.screen
-
+package com.example.shekinah.presentation.screen.registerscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,12 +6,16 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,10 +34,8 @@ import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
 
 @Composable
-fun LoginScreen(
-    onClick: () -> Unit,
-    onClickCreateAcount: () -> Unit
-) {
+fun CreateAcountScreen(onClick: () -> Unit = {}) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
 
@@ -48,16 +49,14 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
 
-
         )
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.5f))
-                .clickable {}
+                .clickable{}
+
         )
-
-
     }
     Column(
         modifier = Modifier
@@ -67,8 +66,15 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Shekinah Orações",
+            text = "Seja um de nós",
             style = TextStyle(fontSize = 28.sp, color = Color.White)
+        )
+        OutlinedTextField(
+            value = name,
+            onValueChange = {},
+            label = { Text(text = "Nome", style = TextStyle(color = Color.White)) },
+            modifier = Modifier
+                .fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
@@ -86,7 +92,7 @@ fun LoginScreen(
         OutlinedTextField(
             value = senha,
             onValueChange = {},
-            label = { Text(text = "senha", style = TextStyle(color = Color.White)) },
+            label = { Text(text = "Senha", style = TextStyle(color = Color.White)) },
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -94,33 +100,47 @@ fun LoginScreen(
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         Button(
-            onClick = { onClick() },
+            onClick = {onClick()},
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
         ) { Text(text = "Entrar") }
 
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
+        HorizontalDivider(
+            modifier = Modifier.padding(vertical = 8.dp),
+            thickness = 3.dp,
+            color = Color.White
+        )
 
-
-        Text(text = "Não tem uma conta?", style = TextStyle(color = Color.White))
         Button(
-            onClick = { onClickCreateAcount() },
             modifier = Modifier
+                .fillMaxWidth()
                 .background(color = Color.Transparent),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+            colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray),
+            onClick = {}
         ) {
-            Text(text = "Cadastre-se.")
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.google),
+                    modifier = Modifier.size(36.dp),
+                    contentDescription = "image google"
+                )
+
+                Spacer(modifier = Modifier.width(22.dp))
+
+                Text(text = "Continue com o google")
+            }
         }
+
+
     }
-
-
 }
-
 
 @Composable
 @Preview
-fun LoginScreenPreview() {
-
+fun CreateAcountScreenPreview() {
+    CreateAcountScreen()
 }

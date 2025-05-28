@@ -1,4 +1,4 @@
-package com.example.shekinah.presentation.screen
+package com.example.shekinah.presentation.screen.listprayscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

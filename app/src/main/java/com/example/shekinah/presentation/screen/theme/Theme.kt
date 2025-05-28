@@ -1,4 +1,4 @@
-package com.example.shekinah.presentation.ui.theme
+package com.example.shekinah.presentation.screen.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

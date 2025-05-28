@@ -7,13 +7,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.shekinah.data.ProviderListData
-import com.example.shekinah.presentation.screen.CreateAcountScreen
-import com.example.shekinah.presentation.screen.ListPrayScreen
-import com.example.shekinah.presentation.screen.LoginScreen
+import com.example.shekinah.presentation.screen.registerscreen.CreateAcountScreen
+import com.example.shekinah.presentation.screen.listprayscreen.ListPrayScreen
+import com.example.shekinah.presentation.screen.loginscreen.LoginScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             val list = ProviderListData().listaDePosts
             val navController = rememberNavController()

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    kotlin("plugin.serialization") version "2.0.21"
+    alias(libs.plugins.kotlin.serialization)
     id("com.google.gms.google-services")
 }
 
@@ -49,7 +49,6 @@ dependencies {
     //implementações do koin para DI
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,10 +68,7 @@ dependencies {
     implementation(libs.firebase.analytics)
 
 
-//serialization
-    val nav_version = "2.6.0"
 
-// Jetpack Compose integration
     implementation(libs.androidx.navigation.compose)
 
 // Views/Fragments integration

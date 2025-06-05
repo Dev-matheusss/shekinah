@@ -19,10 +19,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,12 +29,50 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.presentation.navigation.ListPrayRouts
+import com.example.shekinah.presentation.screen.registerscreen.CreateAcountScreen
+import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterState
+import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun CreateAcountScreen(onClick: () -> Unit = {}) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var senha by remember { mutableStateOf("") }
+fun RegisterRoute(
+    navigateTo: (Any) -> Unit
+) {
+    val viewModel = koinViewModel<RegisterViewModel>()
+    val state = viewModel.registerState.collectAsState().value
+    if (state.result?.isSuccsess == true) {
+        navigateTo(ListPrayRouts)
+    }
+    CreateAcountScreen(
+        state = state,
+        nameChange = {
+            viewModel.nameChange(it)
+        },
+        emailChange = {
+            viewModel.emailChange(it)
+        },
+        passwordChange = {
+            viewModel.passwordChange(it)
+        },
+        onClickRegister = {email, password ->
+            viewModel.register(email, password)
+        },
+        navigateTo = navigateTo
+    )
+}
+
+@Composable
+fun CreateAcountScreen(
+    state: RegisterState,
+    nameChange: (String) -> Unit,
+    emailChange: (String) -> Unit,
+    passwordChange: (String) -> Unit,
+    onClickRegister:(email: String, password: String)-> Unit,
+    navigateTo: (Any) -> Unit,
+
+) {
+
 
     Box(
         modifier = Modifier
@@ -54,7 +89,7 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.5f))
-                .clickable{}
+                .clickable {}
 
         )
     }
@@ -70,9 +105,12 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
             style = TextStyle(fontSize = 28.sp, color = Color.White)
         )
         OutlinedTextField(
-            value = name,
-            onValueChange = {},
+            value = state.name,
+            onValueChange = {newName->
+                nameChange(newName)
+            },
             label = { Text(text = "Nome", style = TextStyle(color = Color.White)) },
+            textStyle = TextStyle(Color.White),
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -80,9 +118,12 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         OutlinedTextField(
-            value = email,
-            onValueChange = {},
+            value = state.email,
+            onValueChange = {newEmail->
+                emailChange(newEmail)
+            },
             label = { Text(text = "email", style = TextStyle(color = Color.White)) },
+            textStyle = TextStyle(Color.White),
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -90,9 +131,12 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         OutlinedTextField(
-            value = senha,
-            onValueChange = {},
+            value = state.password,
+            onValueChange = {newPassword->
+                passwordChange(newPassword)
+            },
             label = { Text(text = "Senha", style = TextStyle(color = Color.White)) },
+            textStyle = TextStyle(Color.White),
             modifier = Modifier
                 .fillMaxWidth()
         )
@@ -100,7 +144,7 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
         Button(
-            onClick = {onClick()},
+            onClick = { onClickRegister(state.email, state.password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
@@ -134,13 +178,18 @@ fun CreateAcountScreen(onClick: () -> Unit = {}) {
                 Text(text = "Continue com o google")
             }
         }
-
-
     }
 }
 
 @Composable
 @Preview
 fun CreateAcountScreenPreview() {
-    CreateAcountScreen()
+    CreateAcountScreen(
+        state = RegisterState("matheus", "matheus@gmail.com", "senha123"),
+        nameChange = {},
+        emailChange = {},
+        passwordChange = {},
+        onClickRegister = { _, _ -> },
+        navigateTo = {}
+    )
 }

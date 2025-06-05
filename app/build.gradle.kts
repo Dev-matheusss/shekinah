@@ -45,6 +45,7 @@ dependencies {
     //implementações para firebase
     implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
 
     //implementações do koin para DI
     implementation(libs.koin.android)

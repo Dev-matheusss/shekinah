@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,17 +53,19 @@ fun NewItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(100.dp)
+        ,
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(8.dp),
 
         ) {
         Row {
             Image(
+                modifier = Modifier
+                    .width(70.dp),
                 painter = painterResource(R.drawable.background_app__1_),
                 contentDescription = "perfil"
             )
-            Spacer(modifier = Modifier.padding(5.dp))
 
             Column(
                 modifier = Modifier
@@ -76,16 +80,7 @@ fun NewItem(
 
             Spacer(modifier = Modifier.padding(65.dp))
 
-            Button(
-                onClick = {},
-                modifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .background(color = Color.Transparent),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
 
-            ) {
-                Text(text = "Ler")
-            }
         }
 
     }

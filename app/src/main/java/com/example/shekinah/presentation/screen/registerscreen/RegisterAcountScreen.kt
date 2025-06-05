@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
 import com.example.shekinah.presentation.navigation.ListPrayRouts
-import com.example.shekinah.presentation.screen.registerscreen.CreateAcountScreen
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterState
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterViewModel
 import org.koin.androidx.compose.koinViewModel

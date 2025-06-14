@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class ApiImpl(val auth: FirebaseAuth) : ApiService {
-    val db = FirebaseFirestore.getInstance()
+
 
     override suspend fun register(email: String, password: String): AuthDto {
         return try {

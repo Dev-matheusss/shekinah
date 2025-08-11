@@ -106,8 +106,8 @@ fun LoginScreen(
 
         OutlinedTextField(
             value = state.email,
-            onValueChange = { newPassword ->
-                emailChange(newPassword)
+            onValueChange = { newEmail ->
+                emailChange(newEmail)
             },
             label = { Text(text = "email", style = TextStyle(color = Color.White)) },
             textStyle = TextStyle(color = Color.White),

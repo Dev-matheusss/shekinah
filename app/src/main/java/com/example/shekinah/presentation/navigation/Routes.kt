@@ -12,6 +12,9 @@ object ListPrayRouts
 object LoginScreenRouts
 
 @Serializable
-object PrayDetailsRoute
+object PrayDetailsRouts
+
+@Serializable
+object PlaceOrderRouts
 
 

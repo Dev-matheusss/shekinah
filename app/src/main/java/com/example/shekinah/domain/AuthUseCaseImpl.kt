@@ -1,9 +1,9 @@
 package com.example.shekinah.domain
 
-import com.example.shekinah.data.repository.Repository
+import com.example.shekinah.data.repository.RepositoryAuth
 import com.example.shekinah.domain.model.Auth
 
-class ShekinahUseCaseImpl(private val repository: Repository) : ShekinahUseCase {
+class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
     override suspend fun register(email: String, password: String): Auth {
         val result = repository.register(email, password)
         return if (result.isSucess) {

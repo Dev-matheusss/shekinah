@@ -2,13 +2,13 @@ package com.example.shekinah.presentation.screen.registerscreen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shekinah.domain.ShekinahUseCase
+import com.example.shekinah.domain.AuthUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(val useCase: ShekinahUseCase) : ViewModel() {
+class RegisterViewModel(val useCase: AuthUseCase) : ViewModel() {
 
     var registerState = MutableStateFlow(RegisterState())
 

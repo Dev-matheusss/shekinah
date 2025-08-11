@@ -2,12 +2,12 @@ package com.example.shekinah.presentation.screen.loginscreen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shekinah.domain.ShekinahUseCase
+import com.example.shekinah.domain.AuthUseCase
 import com.example.shekinah.presentation.screen.loginscreen.LoginState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val usecase: ShekinahUseCase): ViewModel() {
+class LoginViewModel(private val usecase: AuthUseCase): ViewModel() {
     var loginState = MutableStateFlow(LoginState("", ""))
     fun singIn(email: String, password: String) {
         viewModelScope.launch {

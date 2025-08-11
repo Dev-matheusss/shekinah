@@ -1,6 +1,7 @@
 package com.example.shekinah.presentation
 
 import android.app.Application
+import com.example.shekinah.di.firestoreModule
 import com.example.shekinah.di.shekinahModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -12,7 +13,7 @@ class ShekinahApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@ShekinahApplication)
-            modules(listOf(shekinahModule))
+            modules(listOf(shekinahModule, firestoreModule))
 
         }
     }

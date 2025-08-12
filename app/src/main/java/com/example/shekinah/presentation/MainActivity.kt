@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.shekinah.presentation.navigation.CreateAcountRouts
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.navigation.LoginScreenRouts
+import com.example.shekinah.presentation.navigation.PlaceOrderRouts
 import com.example.shekinah.presentation.navigation.createAcountScreen
 import com.example.shekinah.presentation.navigation.loginScreen
 import com.example.shekinah.presentation.navigation.placeorderscren
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             NavHost(
                 navController = navController,
-                startDestination = LoginScreenRouts
+                startDestination = PlaceOrderRouts
             ) {
                 loginScreen(
                     navigateTo = { Any ->
@@ -33,6 +34,9 @@ class MainActivity : ComponentActivity() {
                     }
                 )
                 placeorderscren(
+                    navigateTo = { Any ->
+                        navController.navigate(route = Any)
+                    }
 
                 )
 

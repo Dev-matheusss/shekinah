@@ -10,6 +10,7 @@ import com.example.shekinah.domain.AuthUseCase
 import com.example.shekinah.domain.AuthUseCaseImpl
 import com.example.shekinah.presentation.screen.listprayscreen.ListPrayViewModel
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
+import com.example.shekinah.presentation.screen.placeorder.PlaceOrderViewModel
 import com.example.shekinah.presentation.screen.praydetailsscreen.PrayDetailsViewModel
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -28,5 +29,6 @@ val shekinahModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::PrayDetailsViewModel)
     viewModelOf(::RegisterViewModel)
+    viewModelOf(::PlaceOrderViewModel)
 
 }

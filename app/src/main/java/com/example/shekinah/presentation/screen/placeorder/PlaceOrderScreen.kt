@@ -114,8 +114,7 @@ fun PlaceOrderScreen(
             Spacer(modifier = Modifier.padding(10.dp))
 
             Button(
-                onClick = {onClickSavePray(state.title, state.description)
-                          navigateTo(ListPrayRouts)},
+                onClick = {onClickSavePray(state.title, state.description) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.Transparent),

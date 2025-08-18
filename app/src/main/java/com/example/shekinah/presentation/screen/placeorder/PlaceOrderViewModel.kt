@@ -2,8 +2,7 @@ package com.example.shekinah.presentation.screen.placeorder
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shekinah.domain.DbUseCase
-import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterState
+import com.example.shekinah.domain.usecase.database.DbUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

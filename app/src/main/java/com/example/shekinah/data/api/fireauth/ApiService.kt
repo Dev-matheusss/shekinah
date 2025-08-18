@@ -1,6 +1,6 @@
-package com.example.shekinah.data.api
+package com.example.shekinah.data.api.fireauth
 
-import com.example.shekinah.data.api.model.AuthDto
+import com.example.shekinah.data.model.AuthDto
 
 interface ApiService {
     suspend fun register(email: String, password: String): AuthDto

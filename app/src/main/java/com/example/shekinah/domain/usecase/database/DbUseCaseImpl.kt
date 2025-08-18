@@ -1,6 +1,6 @@
-package com.example.shekinah.domain
+package com.example.shekinah.domain.usecase.database
 
-import com.example.shekinah.data.repository.RepositoryDb
+import com.example.shekinah.data.repository.database.RepositoryDb
 
 class DbUseCaseImpl(private val repository: RepositoryDb) : DbUseCase {
     override suspend fun savePray(title: String, description: String) {

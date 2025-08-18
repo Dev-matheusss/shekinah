@@ -1,4 +1,4 @@
-package com.example.shekinah.domain
+package com.example.shekinah.domain.usecase.firebaseauth
 
 import com.example.shekinah.domain.model.Auth
 

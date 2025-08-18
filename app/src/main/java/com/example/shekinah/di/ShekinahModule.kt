@@ -1,13 +1,13 @@
 package com.example.shekinah.di
 
-import com.example.shekinah.data.api.ApiImpl
-import com.example.shekinah.data.api.ApiService
-import com.example.shekinah.data.datasource.DataSourceAuth
-import com.example.shekinah.data.datasource.DataSourceAuthImpl
-import com.example.shekinah.data.repository.RepositoryAuth
-import com.example.shekinah.data.repository.RepositoryAuthImpl
-import com.example.shekinah.domain.AuthUseCase
-import com.example.shekinah.domain.AuthUseCaseImpl
+import com.example.shekinah.data.api.fireauth.ApiImpl
+import com.example.shekinah.data.api.fireauth.ApiService
+import com.example.shekinah.data.datasource.fireauthdatasource.DataSourceAuth
+import com.example.shekinah.data.datasource.fireauthdatasource.DataSourceAuthImpl
+import com.example.shekinah.data.repository.firebaseauth.RepositoryAuth
+import com.example.shekinah.data.repository.firebaseauth.RepositoryAuthImpl
+import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCase
+import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCaseImpl
 import com.example.shekinah.presentation.screen.listprayscreen.ListPrayViewModel
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
 import com.example.shekinah.presentation.screen.placeorder.PlaceOrderViewModel

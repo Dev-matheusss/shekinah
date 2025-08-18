@@ -1,6 +1,6 @@
-package com.example.shekinah.domain
+package com.example.shekinah.domain.usecase.firebaseauth
 
-import com.example.shekinah.data.repository.RepositoryAuth
+import com.example.shekinah.data.repository.firebaseauth.RepositoryAuth
 import com.example.shekinah.domain.model.Auth
 
 class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {

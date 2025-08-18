@@ -1,6 +1,6 @@
-package com.example.shekinah.data.repository
+package com.example.shekinah.data.repository.firebaseauth
 
-import com.example.shekinah.data.api.model.AuthDto
+import com.example.shekinah.data.model.AuthDto
 
 interface RepositoryAuth {
     suspend fun register(email: String, password: String): AuthDto

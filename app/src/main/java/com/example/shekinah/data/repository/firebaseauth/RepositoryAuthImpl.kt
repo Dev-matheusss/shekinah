@@ -1,7 +1,7 @@
-package com.example.shekinah.data.repository
+package com.example.shekinah.data.repository.firebaseauth
 
-import com.example.shekinah.data.api.ApiService
-import com.example.shekinah.data.api.model.AuthDto
+import com.example.shekinah.data.api.fireauth.ApiService
+import com.example.shekinah.data.model.AuthDto
 
 class RepositoryAuthImpl(private val api: ApiService): RepositoryAuth {
     override suspend fun register(email: String, password: String): AuthDto {

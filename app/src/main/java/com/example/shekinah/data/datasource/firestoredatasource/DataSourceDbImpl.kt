@@ -1,6 +1,6 @@
-package com.example.shekinah.data.datasource
+package com.example.shekinah.data.datasource.firestoredatasource
 
-import com.example.shekinah.data.api.FireStore
+import com.example.shekinah.data.api.firestore.FireStore
 
 class DataSourceDbImpl(private val firestore: FireStore) : DataSourceDb {
     override suspend fun savePray(title: String, description: String) {

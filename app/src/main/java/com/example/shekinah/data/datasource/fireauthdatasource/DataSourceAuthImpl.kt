@@ -1,6 +1,6 @@
-package com.example.shekinah.data.datasource
-import com.example.shekinah.data.api.ApiService
-import com.example.shekinah.data.api.model.AuthDto
+package com.example.shekinah.data.datasource.fireauthdatasource
+import com.example.shekinah.data.api.fireauth.ApiService
+import com.example.shekinah.data.model.AuthDto
 
 class DataSourceAuthImpl(private val api: ApiService) : DataSourceAuth {
 

@@ -26,13 +26,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.data.model.Pray
 import com.example.shekinah.presentation.navigation.ListPrayRouts
+import com.example.shekinah.presentation.screen.listprayscreen.viewModel.ListState
+import com.example.shekinah.presentation.screen.placeorder.PlaceOrderViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun PlaceOrderRout(
     navigateTo: (Any) -> Unit
-){
+) {
     val viewlModel = koinViewModel<PlaceOrderViewModel>()
     val state = viewlModel.placeOrderState.collectAsState().value
 
@@ -44,8 +47,7 @@ fun PlaceOrderRout(
         descriptionChange = {
             viewlModel.descriptionChange(it)
         },
-        onClickSavePray = {
-            title, description ->
+        onClickSavePray = { title, description ->
             viewlModel.savePray(title, description)
         },
         navigateTo = navigateTo
@@ -59,10 +61,11 @@ fun PlaceOrderScreen(
     descriptionChange: (String) -> Unit,
     onClickSavePray: (title: String, description: String) -> Unit,
     navigateTo: (Any) -> Unit
-){
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.Black)
     ) {
         Image(
             painter = painterResource(R.drawable.background_app__1_),
@@ -72,63 +75,64 @@ fun PlaceOrderScreen(
         )
         Box(
             modifier = Modifier
+                .background(color = Color.Black.copy(alpha = 0.5f))
                 .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.3f))
-                .clickable {}
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Faça seu pedido aqui.",
-                    style = TextStyle(fontSize = 28.sp, color = Color.White))
 
-            Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-            OutlinedTextField(
-                value = state.title,
-                onValueChange = {newTitle ->
-                    titleChange(newTitle)
-                },
-                label = { Text(text = "Título", style = TextStyle(color = Color.White))},
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-
-            )
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            OutlinedTextField(
-                value = state.description,
-                onValueChange = {newDescription ->
-                    descriptionChange(newDescription)
-                },
-                label = { Text(text = "Descrição", style = TextStyle(color = Color.White))},
-                modifier = Modifier
-                    .fillMaxWidth()
-
-            )
-
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            Button(
-                onClick = {onClickSavePray(state.title, state.description) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Color.Transparent),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
-
+                    .fillMaxSize()
+                    .padding(20.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(text = "salvar oração")
+                Text(
+                    text = "Faça seu pedido aqui.",
+                    style = TextStyle(fontSize = 28.sp, color = Color.White)
+                )
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+                OutlinedTextField(
+                    value = state.title,
+                    onValueChange = { newTitle ->
+                        titleChange(newTitle)
+                    },
+                    label = { Text(text = "Título", style = TextStyle(color = Color.White)) },
+                    textStyle = TextStyle(color = Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.padding(10.dp))
+                OutlinedTextField(
+                    value = state.description,
+                    onValueChange = { newDescription ->
+                        descriptionChange(newDescription)
+                    },
+                    label = { Text(text = "Descrição", style = TextStyle(color = Color.White)) },
+                    textStyle = TextStyle(color = Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.padding(10.dp))
+                Button(
+                    onClick = {
+                        onClickSavePray(state.title, state.description)
+                        if (state.title.isNotEmpty()) {
+                            navigateTo(ListPrayRouts)
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
+                ) {
+                    Text(text = "salvar oração")
+                }
             }
         }
     }
-
 }
+
 @Composable
 @Preview(showBackground = true)
-fun PlaceOrderPreview(){
-
+fun PlaceOrderPreview() {
 }

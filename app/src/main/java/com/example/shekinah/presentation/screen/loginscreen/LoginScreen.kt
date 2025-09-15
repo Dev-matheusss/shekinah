@@ -77,18 +77,13 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.Black)
     ) {
         Image(
             painter = painterResource(R.drawable.background_app__1_),
             contentDescription = "background",
             modifier = Modifier
                 .fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.3f))
-                .clickable {}
         )
     }
     Column(

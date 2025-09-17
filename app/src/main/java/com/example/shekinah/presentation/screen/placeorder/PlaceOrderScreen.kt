@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -87,7 +88,7 @@ fun PlaceOrderScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Faça seu pedido aqui.",
+                    text = stringResource(R.string.place_your_order_here),
                     style = TextStyle(fontSize = 28.sp, color = Color.White)
                 )
                 Spacer(modifier = Modifier.padding(bottom = 8.dp))
@@ -96,10 +97,11 @@ fun PlaceOrderScreen(
                     onValueChange = { newTitle ->
                         titleChange(newTitle)
                     },
-                    label = { Text(text = "Título", style = TextStyle(color = Color.White)) },
-                    textStyle = TextStyle(color = Color.White),
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    label = { Text(text = stringResource(R.string.tilte_input),
+                        style = TextStyle(color = Color.White)) },
+                        textStyle = TextStyle(color = Color.White),
+                        modifier = Modifier
+                            .fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
                 OutlinedTextField(
@@ -107,9 +109,10 @@ fun PlaceOrderScreen(
                     onValueChange = { newDescription ->
                         descriptionChange(newDescription)
                     },
-                    label = { Text(text = "Descrição", style = TextStyle(color = Color.White)) },
-                    textStyle = TextStyle(color = Color.White),
-                    modifier = Modifier
+                    label = { Text(text = stringResource(R.string.description_input),
+                        style = TextStyle(color = Color.White)) },
+                        textStyle = TextStyle(color = Color.White),
+                        modifier = Modifier
                         .fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.padding(10.dp))
@@ -125,7 +128,7 @@ fun PlaceOrderScreen(
                         .background(color = Color.Transparent),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
                 ) {
-                    Text(text = "salvar oração")
+                    Text(text = stringResource(R.string.save_pray))
                 }
             }
         }

@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -76,6 +77,7 @@ fun CreateAcountScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.Black)
     ) {
         Image(
             painter = painterResource(R.drawable.background_app__1_),
@@ -100,7 +102,7 @@ fun CreateAcountScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Seja um de nós",
+            text = stringResource(R.string.be_one_of_us),
             style = TextStyle(fontSize = 28.sp, color = Color.White)
         )
         OutlinedTextField(
@@ -108,10 +110,11 @@ fun CreateAcountScreen(
             onValueChange = {newName->
                 nameChange(newName)
             },
-            label = { Text(text = "Nome", style = TextStyle(color = Color.White)) },
-            textStyle = TextStyle(Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
+            label = { Text(text = stringResource(R.string.name_input),
+                style = TextStyle(color = Color.White)) },
+                textStyle = TextStyle(Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
@@ -121,23 +124,23 @@ fun CreateAcountScreen(
             onValueChange = {newEmail->
                 emailChange(newEmail)
             },
-            label = { Text(text = "email", style = TextStyle(color = Color.White)) },
-            textStyle = TextStyle(Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
+            label = { Text(text = stringResource(R.string.email_input),
+                style = TextStyle(color = Color.White)) },
+                textStyle = TextStyle(Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
         )
-
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
         OutlinedTextField(
             value = state.password,
             onValueChange = {newPassword->
                 passwordChange(newPassword)
             },
-            label = { Text(text = "Senha", style = TextStyle(color = Color.White)) },
-            textStyle = TextStyle(Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
+            label = { Text(text = stringResource(R.string.password_input),
+                style = TextStyle(color = Color.White)) },
+                textStyle = TextStyle(Color.White),
+                modifier = Modifier
+                    .fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
@@ -148,19 +151,18 @@ fun CreateAcountScreen(
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
-        ) { Text(text = "Entrar") }
+        ) { Text(text = stringResource(R.string.enter_button)) }
 
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 8.dp),
             thickness = 3.dp,
             color = Color.White
         )
-
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f)),
             onClick = {}
         ) {
             Row(
@@ -174,7 +176,7 @@ fun CreateAcountScreen(
 
                 Spacer(modifier = Modifier.width(22.dp))
 
-                Text(text = "Continue com o google")
+                Text(text = stringResource(R.string.continue_with_google))
             }
         }
     }

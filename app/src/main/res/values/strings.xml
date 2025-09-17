@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">shekinah</string>
+    //LoginScreen/RegisterScreen Strings
+    <string name="shekinah_orações">Shekinah Orações</string>
+    <string name="name_input">Nome</string>
+    <string name="email_input">Email</string>
+    <string name="password_input">Senha</string>
+    <string name="enter_button">Entrar</string>
+    <string name="dont_have_an_account">Não tem uma conta?</string>
+    <string name="register">Cadastre-se</string>
+    <string name="be_one_of_us">Seja um de nós</string>
+    <string name="continue_with_google">Continue com o google</string>
+    //PlaceOrderScreen Strings
+    <string name="place_your_order_here">Faça seu pedido aqui.</string>
+    <string name="tilte_input">Título</string>
+    <string name="description_input">Descrição</string>
+    <string name="save_pray">Salvar oração</string>
 </resources>

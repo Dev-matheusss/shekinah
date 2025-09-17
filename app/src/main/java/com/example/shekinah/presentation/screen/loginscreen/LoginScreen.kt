@@ -21,23 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
-import com.example.shekinah.domain.model.Auth
 import com.example.shekinah.presentation.navigation.CreateAcountRouts
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
 import org.koin.androidx.compose.koinViewModel
 
-
-data class LoginState(
-    val email: String,
-    val password: String,
-    val result: Auth? = null
-)
 
 @Composable
 fun LoginRoute(
@@ -78,6 +72,7 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
+
     ) {
         Image(
             painter = painterResource(R.drawable.background_app__1_),
@@ -85,69 +80,86 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
         )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.Black.copy(alpha = 0.5f))
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = stringResource(R.string.shekinah_orações),
+                    style = TextStyle(fontSize = 28.sp, color = Color.White)
+                )
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+
+                OutlinedTextField(
+                    value = state.email,
+                    onValueChange = { newEmail ->
+                        emailChange(newEmail)
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.email_input),
+                            style = TextStyle(color = Color.White)
+                        )
+                    },
+                    textStyle = TextStyle(color = Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+                OutlinedTextField(
+                    value = state.password,
+                    onValueChange = { newPassword ->
+                        passwordChange(newPassword)
+                    },
+                    label = {
+                        Text(
+                            text = stringResource(R.string.password_input),
+                            style = TextStyle(color = Color.White)
+                        )
+                    },
+                    textStyle = TextStyle(color = Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+                state.result?.message?.let {
+                    Text(
+                        text = it,
+                        color = Color.Red,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(vertical = 14.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+
+                Button(
+                    onClick = { onClickSingIn(state.email, state.password) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
+                ) {
+                    Text(text = stringResource(R.string.enter_button)) }
+                Spacer(modifier = Modifier.padding(bottom = 8.dp))
+                Text(text = stringResource(R.string.dont_have_an_account),
+                    style = TextStyle(color = Color.White))
+                Text(
+                    text = stringResource(R.string.register),
+                    color = Color.White,
+                    modifier = Modifier
+                        .clickable { navigateTo(CreateAcountRouts) }
+                        .padding(top = 5.dp)
+                )
+            }
+        }
     }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Shekinah Orações",
-            style = TextStyle(fontSize = 28.sp, color = Color.White)
-        )
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        OutlinedTextField(
-            value = state.email,
-            onValueChange = { newEmail ->
-                emailChange(newEmail)
-            },
-            label = { Text(text = "email", style = TextStyle(color = Color.White)) },
-            textStyle = TextStyle(color = Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        OutlinedTextField(
-            value = state.password,
-            onValueChange = { newPassword ->
-                passwordChange(newPassword)
-            },
-            label = { Text(text = "senha", style = TextStyle(color = Color.White)) },
-            textStyle = TextStyle(color = Color.White),
-            modifier = Modifier
-                .fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        Button(
-            onClick = { onClickSingIn(state.email, state.password) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = Color.Transparent),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
-        ) { Text(text = "Entrar") }
-
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        Text(text = "Não tem uma conta?", style = TextStyle(color = Color.White))
-
-        Text(
-
-            text = "Cadastre-se",
-            color = Color.White,
-            modifier = Modifier
-                .clickable { navigateTo(CreateAcountRouts)}
-                .padding(top = 5.dp)
-
-        )
-    }
-
-
 }
 
 

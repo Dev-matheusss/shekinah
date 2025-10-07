@@ -4,5 +4,6 @@ import androidx.compose.ui.graphics.vector.EmptyPath
 import com.example.shekinah.data.model.Pray
 
 data class ListState (
-   val list : MutableList<Pray> = mutableListOf()
+   val list : MutableList<Pray> = mutableListOf(),
+
 )

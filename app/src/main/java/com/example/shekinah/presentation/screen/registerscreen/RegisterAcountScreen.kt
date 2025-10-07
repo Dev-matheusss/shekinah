@@ -55,8 +55,8 @@ fun RegisterRoute(
         passwordChange = {
             viewModel.passwordChange(it)
         },
-        onClickRegister = {email, password ->
-            viewModel.register(email, password)
+        onClickRegister = {name,email, password ->
+            viewModel.register( email, password)
         },
         navigateTo = navigateTo
     )
@@ -68,7 +68,7 @@ fun CreateAcountScreen(
     nameChange: (String) -> Unit,
     emailChange: (String) -> Unit,
     passwordChange: (String) -> Unit,
-    onClickRegister:(email: String, password: String)-> Unit,
+    onClickRegister:(name: String,email: String, password: String)-> Unit,
     navigateTo: (Any) -> Unit,
 
 ) {
@@ -144,9 +144,15 @@ fun CreateAcountScreen(
         )
 
         Spacer(modifier = Modifier.padding(bottom = 8.dp))
+        state.result?.message?.let {
+            Text(text = it,
+                color = Color.Red,
+                fontSize = 16.sp,
+                modifier = Modifier.padding(14.dp))
+        }
 
         Button(
-            onClick = { onClickRegister(state.email, state.password) },
+            onClick = { onClickRegister(state.name, state.email, state.password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
@@ -190,7 +196,7 @@ fun CreateAcountScreenPreview() {
         nameChange = {},
         emailChange = {},
         passwordChange = {},
-        onClickRegister = { _, _ -> },
+        onClickRegister = {_, _, _ -> },
         navigateTo = {}
     )
 }

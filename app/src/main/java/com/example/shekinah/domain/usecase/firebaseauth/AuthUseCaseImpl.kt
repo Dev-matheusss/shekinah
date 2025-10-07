@@ -12,7 +12,7 @@ class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
             when (result.message) {
                 "Given String is empty or null" -> {
                     Auth(
-                        message = "Preencha todos campos",
+                        message = "Preencha todos os campos",
                         )
                 }
 
@@ -42,6 +42,8 @@ class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
 
 
     }
+
+
 
     override suspend fun singIn(email: String, password: String): Auth {
         val result = repository.singIn(email, password)

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.shekinah.data.model.Pray
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.navigation.LoginScreenRouts
 import com.example.shekinah.presentation.navigation.PlaceOrderRouts
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
                         navController.navigate(Any)
                     }
                 )
-               prayDetailsScreen (
+               prayDetailsScreen (pray = Pray,
                    navigateTo = { Any ->
                        navController.navigate(Any)
                    }

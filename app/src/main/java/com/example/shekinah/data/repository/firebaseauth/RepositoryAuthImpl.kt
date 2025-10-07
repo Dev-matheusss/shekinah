@@ -2,9 +2,10 @@ package com.example.shekinah.data.repository.firebaseauth
 
 import com.example.shekinah.data.api.fireauth.ApiService
 import com.example.shekinah.data.model.AuthDto
+import com.google.firebase.auth.FirebaseAuth
 
 class RepositoryAuthImpl(private val api: ApiService): RepositoryAuth {
-    override suspend fun register(email: String, password: String): AuthDto {
+    override suspend fun register( email: String, password: String): AuthDto {
         return api.register(email,password)
     }
 

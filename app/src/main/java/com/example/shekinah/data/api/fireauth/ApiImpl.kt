@@ -14,6 +14,7 @@ class ApiImpl(val auth: FirebaseAuth) : ApiService {
             AuthDto(isSucess = false, "${e.message}")
         }
     }
+
     override suspend fun singIn(email: String, password: String): AuthDto {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()

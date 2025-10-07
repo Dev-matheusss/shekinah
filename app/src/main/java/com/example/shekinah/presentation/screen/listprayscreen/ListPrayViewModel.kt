@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shekinah.data.model.Pray
 import com.example.shekinah.domain.usecase.database.DbUseCase
+import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCase
 import com.example.shekinah.presentation.screen.listprayscreen.viewModel.ListState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

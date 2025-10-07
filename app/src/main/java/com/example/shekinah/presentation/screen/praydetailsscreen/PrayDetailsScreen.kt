@@ -2,10 +2,8 @@ package com.example.shekinah.presentation.screen.praydetailsscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,26 +11,23 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
-import java.nio.file.WatchEvent
+import com.example.shekinah.data.model.Pray
 
 @Composable
-fun PrayRoute() {
-    PrayDetailsScreen()
+fun PrayRoute(pray: Pray) {
+    PrayDetailsScreen(pray = pray)
 }
 
 @Composable
-fun PrayDetailsScreen() {
+fun PrayDetailsScreen(pray: Pray) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +54,7 @@ fun PrayDetailsScreen() {
                 .fillMaxSize()
         ) {
             Text(
-                text = "Irmão doente",
+                text = pray.title,
                 color = Color.White,
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
@@ -69,7 +64,7 @@ fun PrayDetailsScreen() {
             )
 
             Text(
-                text = " teste para pedido de oração,essa será uma description completa na tela de detalhes.",
+                text = pray.description,
                 color = Color.White,
                 fontSize = 22.sp,
                 textAlign = TextAlign.Start,
@@ -84,6 +79,4 @@ fun PrayDetailsScreen() {
 @Composable
 @Preview(showBackground = true)
 fun PrayDetailsPreview() {
-    PrayDetailsScreen()
 }
-

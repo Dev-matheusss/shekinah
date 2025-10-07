@@ -30,9 +30,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +48,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ListRoute(
-    onClickDetails: () -> Unit,
+    onClickDetails: (Pray) -> Unit,
     navigateTo: (Any) -> Unit,
     state: ListState
 ) {
@@ -55,7 +57,7 @@ fun ListRoute(
 
 @Composable
 fun ListPrayScreen(
-    onClickDetails: () -> Unit,
+    onClickDetails: (Pray) -> Unit,
     navigateTo: (Any) -> Unit,
     state: ListState,
 
@@ -77,7 +79,7 @@ fun ListPrayScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 contentPadding = PaddingValues(horizontal = 20.dp),
                 modifier = Modifier
-                    .padding(top = 32.dp)
+                    .padding(top = 50.dp, bottom = 35.dp)
                     .fillMaxSize()
             ) {
                 items(
@@ -87,16 +89,41 @@ fun ListPrayScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(100.dp)
-                                .clickable { onClickDetails() },
+                                .clickable { onClickDetails(item)},
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             shape = RoundedCornerShape(18.dp),
-                            elevation = CardDefaults.cardElevation(8.dp),
+                            elevation = CardDefaults.cardElevation(12.dp),
                         ) {
-                            Text(
-                                item.title,
-                                style = TextStyle(color = Color.Black, fontSize = 25.sp),
-                                modifier = Modifier.padding(start = 12.dp, top = 8.dp)
-                            )
+                            Row() {
+                                Image(
+                                    modifier = Modifier
+                                        .clip(RoundedCornerShape(6.dp)),
+                                    painter = painterResource(R.drawable.pastor),
+                                    contentDescription = "imagem")
+                                Column {
+                                    Text(
+                                        item.title,
+                                        style = TextStyle(color = Color.Black, fontSize = 18.sp),
+                                        modifier = Modifier.padding(start = 8.dp, top = 8.dp)
+                                    )
+                                    Text(
+                                        item.description,
+                                        style = TextStyle(color = Color.Black, fontSize = 12.sp),
+                                        maxLines = 3,
+                                        overflow = TextOverflow.Ellipsis,
+                                        modifier = Modifier.padding(start = 8.dp, top = 2.dp, end = 8.dp)
+                                    )
+
+                                    Spacer(modifier = Modifier.weight(1f))
+                                    Text(
+                                        "Data Postagem : 16/01/2000",
+                                        style = TextStyle(color = Color.Black, fontSize = 10.sp),
+                                        modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
+                                    )
+
+                                }
+
+                            }
                         }
                     })
             }
@@ -106,7 +133,7 @@ fun ListPrayScreen(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(bottom = 16.dp, end = 16.dp),
-            containerColor = Color.White,
+            containerColor = Color.LightGray,
             contentColor = Color.Black
         ) { Icon(Icons.Default.Add, contentDescription = "Adicionar") }
     }
@@ -118,8 +145,8 @@ fun ListPrayPreview() {
     ListPrayScreen(
         onClickDetails = {}, navigateTo = {}, state = ListState(
             list = mutableListOf(
-                Pray(title = "Pai Nosso", description = "Oração tradicional"),
-                Pray(title = "Ave Maria", description = "Oração mariana")
+                Pray(id = "",title = "Pai Nosso", description = "Oração tradicional"),
+                Pray(id = "",title = "Ave Maria", description = "Oração mariana")
             )
         )
     )

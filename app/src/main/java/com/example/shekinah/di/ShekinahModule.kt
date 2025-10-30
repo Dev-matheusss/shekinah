@@ -12,6 +12,7 @@ import com.example.shekinah.presentation.screen.listprayscreen.ListPrayViewModel
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
 import com.example.shekinah.presentation.screen.placeorder.PlaceOrderViewModel
 import com.example.shekinah.presentation.screen.praydetailsscreen.PrayDetailsViewModel
+import com.example.shekinah.presentation.screen.recoverPassword.RecoverPasswordViewModel
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterViewModel
 import com.google.firebase.auth.FirebaseAuth
 import org.koin.core.module.dsl.bind
@@ -30,5 +31,6 @@ val shekinahModule = module {
     viewModelOf(::PrayDetailsViewModel)
     viewModelOf(::RegisterViewModel)
     viewModelOf(::PlaceOrderViewModel)
+    viewModelOf(::RecoverPasswordViewModel)
 
 }

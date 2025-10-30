@@ -20,14 +20,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
 import com.example.shekinah.data.model.Pray
+import com.example.shekinah.presentation.navigation.PrayDetailsRouts
 
 @Composable
-fun PrayRoute(pray: Pray) {
-    PrayDetailsScreen(pray = pray)
+fun PrayRoute(
+    id: String,
+    state: ScreenDetailsState
+) {
+    PrayDetailsScreen(id = id, state = state)
 }
 
 @Composable
-fun PrayDetailsScreen(pray: Pray) {
+fun PrayDetailsScreen(
+    id: String,
+    state: ScreenDetailsState
+) {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -45,7 +53,7 @@ fun PrayDetailsScreen(pray: Pray) {
             .fillMaxSize()
             .padding(all = 42.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.Gray.copy(alpha = 0.3f)
+            containerColor = Color.Black.copy(alpha = 0.8f)
         )
 
     ) {
@@ -54,7 +62,7 @@ fun PrayDetailsScreen(pray: Pray) {
                 .fillMaxSize()
         ) {
             Text(
-                text = pray.title,
+                text = state.pray?.title ?: "...",
                 color = Color.White,
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
@@ -64,7 +72,7 @@ fun PrayDetailsScreen(pray: Pray) {
             )
 
             Text(
-                text = pray.description,
+                text = state.pray?.description ?: "...",
                 color = Color.White,
                 fontSize = 22.sp,
                 textAlign = TextAlign.Start,

@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.data.model.Pray
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.screen.listprayscreen.viewModel.ListState
@@ -85,43 +86,42 @@ fun PlaceOrderScreen(
                 .background(color = Color.Black.copy(alpha = 0.5f))
                 .fillMaxSize()
         ) {
-
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp),
+                    .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
             ) {
                 Text(
                     text = stringResource(R.string.place_your_order_here),
                     style = TextStyle(fontSize = 28.sp, color = Color.White)
                 )
-                Spacer(modifier = Modifier.padding(bottom = 8.dp))
-                OutlinedTextField(
+                OutlineTextFieldComp(
                     value = state.title,
                     onValueChange = { newTitle ->
                         titleChange(newTitle)
                     },
-                    label = { Text(text = stringResource(R.string.tilte_input),
-                        style = TextStyle(color = Color.White)) },
-                        textStyle = TextStyle(color = Color.White),
-                        modifier = Modifier
-                            .fillMaxWidth()
+                    label = {
+                        Text(
+                            text = stringResource(R.string.tilte_input),
+                            style = TextStyle(color = Color.White)
+                        )
+                    },
+                    textStyle = TextStyle(color = Color.White),
                 )
-                Spacer(modifier = Modifier.padding(10.dp))
-                OutlinedTextField(
+                OutlineTextFieldComp(
                     value = state.description,
                     onValueChange = { newDescription ->
                         descriptionChange(newDescription)
                     },
-                    label = { Text(text = stringResource(R.string.description_input),
-                        style = TextStyle(color = Color.White)) },
-                        textStyle = TextStyle(color = Color.White),
-                        modifier = Modifier
-                        .fillMaxWidth()
+                    label = {
+                        Text(
+                            text = stringResource(R.string.description_input),
+                            style = TextStyle(color = Color.White)
+                        )
+                    },
+                    textStyle = TextStyle(color = Color.White),
                 )
-                Spacer(modifier = Modifier.padding(10.dp))
                 if (errorMessage.isNotEmpty()) {
                     Text(
                         text = errorMessage,
@@ -129,20 +129,18 @@ fun PlaceOrderScreen(
                         modifier = Modifier.padding(top = 8.dp)
                     )
                 }
-                Spacer(modifier = Modifier.padding(10.dp))
                 Button(
-
                     onClick = {
-                        onClickSavePray(state.title, state.description,)
-                        if (state.title.isNotEmpty()) {
+                        onClickSavePray(state.title, state.description)
+                        if (state.title.isNotEmpty() && state.description.isNotEmpty()) {
                             navigateTo(ListPrayRouts)
-                        }else {
+                        } else {
                             errorMessage = "Preencha todos os campos"
                         }
-
                     },
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(horizontal = 12.dp)
                         .background(color = Color.Transparent),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
                 ) {

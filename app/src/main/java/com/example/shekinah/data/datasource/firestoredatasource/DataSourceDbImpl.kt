@@ -11,4 +11,8 @@ class DataSourceDbImpl(private val firestore: FireStore) : DataSourceDb {
     override suspend fun recoverPray(): Flow<MutableList<Pray>>{
         return firestore.recoverPray()
     }
+
+    override suspend fun recoverDetails(id: String): Pray? {
+        return firestore.recoverDetails(id)
+    }
 }

@@ -1,9 +1,13 @@
 package com.example.shekinah.data.model
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-@Parcelize
+import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
+import java.sql.Timestamp
+
+@Serializable
 data class Pray (
-    val id: String,
-    val title: String ,
-    val description: String
-): Parcelable
+    val id: String = "",
+    val title: String = "",
+    val description: String = "",
+    val data: Long? = null
+)

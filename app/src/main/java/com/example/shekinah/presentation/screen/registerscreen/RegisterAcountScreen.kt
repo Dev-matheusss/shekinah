@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,10 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterState
 import com.example.shekinah.presentation.screen.registerscreen.viewmodel.RegisterViewModel
@@ -55,8 +58,8 @@ fun RegisterRoute(
         passwordChange = {
             viewModel.passwordChange(it)
         },
-        onClickRegister = {name,email, password ->
-            viewModel.register( email, password)
+        onClickRegister = { name, email, password ->
+            viewModel.register(email, password)
         },
         navigateTo = navigateTo
     )
@@ -68,10 +71,10 @@ fun CreateAcountScreen(
     nameChange: (String) -> Unit,
     emailChange: (String) -> Unit,
     passwordChange: (String) -> Unit,
-    onClickRegister:(name: String,email: String, password: String)-> Unit,
+    onClickRegister: (name: String, email: String, password: String) -> Unit,
     navigateTo: (Any) -> Unit,
 
-) {
+    ) {
 
 
     Box(
@@ -96,64 +99,71 @@ fun CreateAcountScreen(
     }
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(all = 16.dp),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = spacedBy(8.dp, Alignment.CenterVertically)
     ) {
         Text(
             text = stringResource(R.string.be_one_of_us),
             style = TextStyle(fontSize = 28.sp, color = Color.White)
         )
-        OutlinedTextField(
+        OutlineTextFieldComp(
             value = state.name,
-            onValueChange = {newName->
+            onValueChange = { newName ->
                 nameChange(newName)
             },
-            label = { Text(text = stringResource(R.string.name_input),
-                style = TextStyle(color = Color.White)) },
-                textStyle = TextStyle(Color.White),
-                modifier = Modifier
-                    .fillMaxWidth()
+            label = {
+                Text(
+                    text = stringResource(R.string.name_input),
+                    style = TextStyle(color = Color.White)
+                )
+            },
+            textStyle = TextStyle(Color.White)
         )
 
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-        OutlinedTextField(
+        OutlineTextFieldComp(
             value = state.email,
-            onValueChange = {newEmail->
+            onValueChange = { newEmail ->
                 emailChange(newEmail)
             },
-            label = { Text(text = stringResource(R.string.email_input),
-                style = TextStyle(color = Color.White)) },
-                textStyle = TextStyle(Color.White),
-                modifier = Modifier
-                    .fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
-        OutlinedTextField(
-            value = state.password,
-            onValueChange = {newPassword->
-                passwordChange(newPassword)
+            label = {
+                Text(
+                    text = stringResource(R.string.email_input),
+                    style = TextStyle(color = Color.White)
+                )
             },
-            label = { Text(text = stringResource(R.string.password_input),
-                style = TextStyle(color = Color.White)) },
-                textStyle = TextStyle(Color.White),
-                modifier = Modifier
-                    .fillMaxWidth()
+            textStyle = TextStyle(Color.White)
         )
 
-        Spacer(modifier = Modifier.padding(bottom = 8.dp))
+        OutlineTextFieldComp(
+            value = state.password,
+            onValueChange = { newPassword ->
+                passwordChange(newPassword)
+            },
+            visualTransformation = PasswordVisualTransformation(),
+            label = {
+                Text(
+                    text = stringResource(R.string.password_input),
+                    style = TextStyle(color = Color.White)
+                )
+            },
+            textStyle = TextStyle(Color.White),
+
+            )
+
         state.result?.message?.let {
-            Text(text = it,
+            Text(
+                text = it,
                 color = Color.Red,
                 fontSize = 16.sp,
-                modifier = Modifier.padding(14.dp))
+                modifier = Modifier.padding(14.dp)
+            )
         }
 
         Button(
             onClick = { onClickRegister(state.name, state.email, state.password) },
             modifier = Modifier
+                .padding(horizontal = 12.dp)
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
@@ -161,26 +171,26 @@ fun CreateAcountScreen(
 
         HorizontalDivider(
             modifier = Modifier.padding(vertical = 8.dp),
-            thickness = 3.dp,
+            thickness = 2.dp,
             color = Color.White
         )
         Button(
             modifier = Modifier
+                .padding(horizontal = 12.dp)
                 .fillMaxWidth()
                 .background(color = Color.Transparent),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f)),
             onClick = {}
         ) {
             Row(
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(9.dp)
             ) {
                 Image(
                     painter = painterResource(R.drawable.google),
-                    modifier = Modifier.size(36.dp),
+                    modifier = Modifier.size(26.dp),
                     contentDescription = "image google"
                 )
-
-                Spacer(modifier = Modifier.width(22.dp))
 
                 Text(text = stringResource(R.string.continue_with_google))
             }
@@ -196,7 +206,7 @@ fun CreateAcountScreenPreview() {
         nameChange = {},
         emailChange = {},
         passwordChange = {},
-        onClickRegister = {_, _, _ -> },
+        onClickRegister = { _, _, _ -> },
         navigateTo = {}
     )
 }

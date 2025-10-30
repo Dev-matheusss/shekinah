@@ -22,7 +22,7 @@ class ListPrayViewModel(private val dbUseCase: DbUseCase) : ViewModel() {
         viewModelScope.launch {
             dbUseCase.recoverPray().collect { listPrays ->
                 _state.update { currentState ->
-                    currentState.copy(list = listPrays)
+                    currentState.copy(list = listPrays.toList())
                 }
             }
         }

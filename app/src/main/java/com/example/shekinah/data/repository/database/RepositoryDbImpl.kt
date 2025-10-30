@@ -11,4 +11,8 @@ class RepositoryDbImpl(private val dataSource: DataSourceDb) : RepositoryDb {
     override suspend fun recoverPray(): Flow<MutableList<Pray>> {
         return dataSource.recoverPray()
     }
+
+    override suspend fun recoverDetails(id: String): Pray? {
+        return dataSource.recoverDetails(id)
+    }
 }

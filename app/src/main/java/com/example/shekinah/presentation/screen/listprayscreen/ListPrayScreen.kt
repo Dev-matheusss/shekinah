@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -52,7 +53,11 @@ fun ListRoute(
     navigateTo: (Any) -> Unit,
     state: ListState
 ) {
-    ListPrayScreen(onClickDetails, navigateTo = navigateTo, state)
+    ListPrayScreen(
+        onClickDetails = onClickDetails,
+        navigateTo = navigateTo,
+        state = state
+    )
 }
 
 @Composable
@@ -60,9 +65,7 @@ fun ListPrayScreen(
     onClickDetails: (Pray) -> Unit,
     navigateTo: (Any) -> Unit,
     state: ListState,
-
-    ) {
-
+) {
     Box(
         modifier = Modifier
             .background(Color.Black)
@@ -84,12 +87,14 @@ fun ListPrayScreen(
             ) {
                 items(
                     state.list,
+                    key = {it.id},
                     itemContent = { item ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(100.dp)
-                                .clickable { onClickDetails(item)},
+                                .clickable { onClickDetails(item) }
+                                .graphicsLayer{alpha = 0.99f},
                             colors = CardDefaults.cardColors(containerColor = Color.White),
                             shape = RoundedCornerShape(18.dp),
                             elevation = CardDefaults.cardElevation(12.dp),
@@ -98,8 +103,9 @@ fun ListPrayScreen(
                                 Image(
                                     modifier = Modifier
                                         .clip(RoundedCornerShape(6.dp)),
-                                    painter = painterResource(R.drawable.pastor),
-                                    contentDescription = "imagem")
+                                    painter = painterResource(R.drawable.nao),
+                                    contentDescription = "imagem"
+                                )
                                 Column {
                                     Text(
                                         item.title,
@@ -111,12 +117,16 @@ fun ListPrayScreen(
                                         style = TextStyle(color = Color.Black, fontSize = 12.sp),
                                         maxLines = 3,
                                         overflow = TextOverflow.Ellipsis,
-                                        modifier = Modifier.padding(start = 8.dp, top = 2.dp, end = 8.dp)
+                                        modifier = Modifier.padding(
+                                            start = 8.dp,
+                                            top = 2.dp,
+                                            end = 8.dp
+                                        )
                                     )
 
                                     Spacer(modifier = Modifier.weight(1f))
                                     Text(
-                                        "Data Postagem : 16/01/2000",
+                                        "Data Postagem ${formatDate(item.data)}",
                                         style = TextStyle(color = Color.Black, fontSize = 10.sp),
                                         modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
                                     )
@@ -129,7 +139,9 @@ fun ListPrayScreen(
             }
         }
         FloatingActionButton(
-            onClick = { navigateTo(PlaceOrderRouts) },
+            onClick = {
+                navigateTo(PlaceOrderRouts)
+            },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(bottom = 16.dp, end = 16.dp),
@@ -145,9 +157,16 @@ fun ListPrayPreview() {
     ListPrayScreen(
         onClickDetails = {}, navigateTo = {}, state = ListState(
             list = mutableListOf(
-                Pray(id = "",title = "Pai Nosso", description = "Oração tradicional"),
-                Pray(id = "",title = "Ave Maria", description = "Oração mariana")
+                Pray(id = "", title = "Pai Nosso", description = "Oração tradicional"),
+                Pray(id = "", title = "Ave Maria", description = "Oração mariana")
             )
         )
     )
+}
+
+fun formatDate(millis: Long?): String {
+    if (millis == null) return "Sem data"
+    val date = java.util.Date(millis)
+    val formatter = java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault())
+    return formatter.format(date)
 }

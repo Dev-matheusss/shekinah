@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -23,10 +24,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.presentation.navigation.CreateAcountRouts
 import com.example.shekinah.presentation.navigation.ListPrayRouts
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
@@ -87,18 +90,17 @@ fun LoginScreen(
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(all = 16.dp),
+                    .fillMaxSize(),
+
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
             ) {
                 Text(
                     text = stringResource(R.string.shekinah_orações),
                     style = TextStyle(fontSize = 28.sp, color = Color.White)
                 )
-                Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
-                OutlinedTextField(
+                OutlineTextFieldComp(
                     value = state.email,
                     onValueChange = { newEmail ->
                         emailChange(newEmail)
@@ -109,16 +111,14 @@ fun LoginScreen(
                             style = TextStyle(color = Color.White)
                         )
                     },
-                    textStyle = TextStyle(color = Color.White),
-                    modifier = Modifier
-                        .fillMaxWidth()
+                    textStyle = TextStyle(color = Color.White)
                 )
-                Spacer(modifier = Modifier.padding(bottom = 8.dp))
-                OutlinedTextField(
+                OutlineTextFieldComp(
                     value = state.password,
                     onValueChange = { newPassword ->
                         passwordChange(newPassword)
                     },
+                    visualTransformation = PasswordVisualTransformation(),
                     label = {
                         Text(
                             text = stringResource(R.string.password_input),
@@ -126,9 +126,14 @@ fun LoginScreen(
                         )
                     },
                     textStyle = TextStyle(color = Color.White),
-                    modifier = Modifier
-                        .fillMaxWidth()
                 )
+                Text(text = "Esqueceu sua senha?", style = TextStyle(Color.White), modifier = Modifier
+                    .clickable(onClick = {})
+                    .padding(end = 12.dp)
+                    .fillMaxWidth()
+                    .wrapContentWidth(Alignment.End))
+
+
                 state.result?.message?.let {
                     Text(
                         text = it,
@@ -137,25 +142,27 @@ fun LoginScreen(
                         modifier = Modifier.padding(vertical = 14.dp)
                     )
                 }
-                Spacer(modifier = Modifier.padding(bottom = 8.dp))
 
                 Button(
                     onClick = { onClickSingIn(state.email, state.password) },
                     modifier = Modifier
+                        .padding(horizontal = 12.dp)
                         .fillMaxWidth()
                         .background(color = Color.Transparent),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
                 ) {
-                    Text(text = stringResource(R.string.enter_button)) }
-                Spacer(modifier = Modifier.padding(bottom = 8.dp))
-                Text(text = stringResource(R.string.dont_have_an_account),
-                    style = TextStyle(color = Color.White))
+                    Text(text = stringResource(R.string.enter_button))
+                }
+
+                Text(
+                    text = stringResource(R.string.dont_have_an_account),
+                    style = TextStyle(color = Color.White)
+                )
                 Text(
                     text = stringResource(R.string.register),
                     color = Color.White,
                     modifier = Modifier
                         .clickable { navigateTo(CreateAcountRouts) }
-                        .padding(top = 5.dp)
                 )
             }
         }

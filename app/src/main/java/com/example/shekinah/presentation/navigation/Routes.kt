@@ -12,9 +12,16 @@ object ListPrayRouts
 object LoginScreenRouts
 
 @Serializable
-object PrayDetailsRouts
+data class PrayDetailsRouts(
+    val id: String
+)
+
 
 @Serializable
 object PlaceOrderRouts
+
+@Serializable
+object RecoverPasswordRouts
+
 
 

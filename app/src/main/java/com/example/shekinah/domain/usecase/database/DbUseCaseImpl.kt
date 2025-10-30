@@ -9,11 +9,14 @@ class DbUseCaseImpl(private val repository: RepositoryDb) : DbUseCase {
         return if (title.isNotEmpty() && description.isNotEmpty()) {
             repository.savePray(title, description)
         } else {
-
         }
     }
 
     override suspend fun recoverPray(): Flow<MutableList<Pray>> {
         return repository.recoverPray()
+    }
+
+    override suspend fun recoverDetails(id: String): Pray? {
+        return repository.recoverDetails(id)
     }
 }

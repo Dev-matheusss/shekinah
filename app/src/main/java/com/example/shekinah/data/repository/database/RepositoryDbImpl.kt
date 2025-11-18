@@ -5,8 +5,8 @@ import com.example.shekinah.data.model.Pray
 import kotlinx.coroutines.flow.Flow
 
 class RepositoryDbImpl(private val dataSource: DataSourceDb) : RepositoryDb {
-    override suspend fun savePray(title:String, description: String){
-        return dataSource.savePray(title,description)
+    override suspend fun savePray(title:String, description: String, name: String){
+        return dataSource.savePray(title,description,name)
     }
     override suspend fun recoverPray(): Flow<MutableList<Pray>> {
         return dataSource.recoverPray()

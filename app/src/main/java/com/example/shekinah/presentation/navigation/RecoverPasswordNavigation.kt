@@ -8,7 +8,7 @@ import com.example.shekinah.presentation.screen.recoverPassword.RecoverPasswordV
 import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.recoverPasswordScreen(
-    navigateTo: (Any) -> Unit = {}
+    navigateTo:(Any)-> Unit = {}
 ) {
     composable<RecoverPasswordRouts> {
         val viewModel = koinViewModel<RecoverPasswordViewModel>()

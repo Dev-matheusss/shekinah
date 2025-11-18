@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 
 class PlaceOrderViewModel(private val useCase: DbUseCase) : ViewModel() {
     var placeOrderState = MutableStateFlow(PlaceOrderState())
-    fun savePray(title: String, description: String) {
+    fun savePray(title: String, description: String, name: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            useCase.savePray(title, description)
+            useCase.savePray(title, description, name)
         }
     }
 

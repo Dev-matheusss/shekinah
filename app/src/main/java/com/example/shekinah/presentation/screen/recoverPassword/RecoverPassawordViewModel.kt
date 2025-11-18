@@ -16,10 +16,13 @@ class RecoverPasswordViewModel(private val useCase: AuthUseCase): ViewModel() {
         viewModelScope.launch {
             try {
                 val (success, message) = useCase.recoverPassword(email)
+                println("🔥 DEBUG MESSAGE -> '$message'")
                 _state.value = RecoverPasswordState(
                     success = success,
                     message = message)
+
             }catch (e: Exception){
+                println("🔥 DEBUG EXCEPTION -> '${e.localizedMessage}'")
                 _state.value = RecoverPasswordState(
                     success = false,
                     message = e.localizedMessage ?: "Erro desconhecido")

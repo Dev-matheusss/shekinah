@@ -6,8 +6,11 @@ import com.example.shekinah.data.model.RecoverDto
 import com.google.firebase.auth.FirebaseAuth
 
 class RepositoryAuthImpl(private val api: ApiService): RepositoryAuth {
-    override suspend fun register( email: String, password: String): AuthDto {
-        return api.register(email,password)
+    override suspend fun register( email: String, password: String, name: String): AuthDto {
+        return api.register(email,password,name)
+    }
+    override fun getCurrentUserName(): String? {
+        return FirebaseAuth.getInstance().currentUser?.displayName
     }
 
     override suspend fun singIn(email: String, password: String): AuthDto {

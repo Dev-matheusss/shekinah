@@ -17,10 +17,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -59,7 +66,7 @@ fun RegisterRoute(
             viewModel.passwordChange(it)
         },
         onClickRegister = { name, email, password ->
-            viewModel.register(email, password)
+            viewModel.register(email, password, name)
         },
         navigateTo = navigateTo
     )
@@ -134,21 +141,38 @@ fun CreateAcountScreen(
             },
             textStyle = TextStyle(Color.White)
         )
-
+        var passwordVisible by remember { mutableStateOf(false) }
         OutlineTextFieldComp(
             value = state.password,
             onValueChange = { newPassword ->
                 passwordChange(newPassword)
             },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation = if (passwordVisible) {
+                VisualTransformation.None
+            } else {
+                PasswordVisualTransformation()
+            },
             label = {
                 Text(
                     text = stringResource(R.string.password_input),
                     style = TextStyle(color = Color.White)
                 )
             },
+            trailingIcon = {
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Icon(
+                        painter = painterResource(
+                            if (passwordVisible)
+                                R.drawable.outline_password_sample
+                            else
+                                R.drawable.outline_password_hidden
+                        ),
+                        contentDescription = if (passwordVisible) "Esconder senha" else "Mostrar senha",
+                        tint = Color.White
+                    )
+                }
+            },
             textStyle = TextStyle(Color.White),
-
             )
 
         state.result?.message?.let {

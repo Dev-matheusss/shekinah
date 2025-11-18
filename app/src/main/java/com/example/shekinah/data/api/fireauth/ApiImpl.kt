@@ -5,14 +5,21 @@ import com.example.shekinah.data.model.AuthDto
 import com.example.shekinah.data.model.RecoverDto
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class ApiImpl(val auth: FirebaseAuth) : ApiService {
 
-    override suspend fun register(email: String, password: String): AuthDto {
+    override suspend fun register(email: String, password: String, name: String): AuthDto {
         return try {
-            auth.createUserWithEmailAndPassword(email, password).await()
+            val result = auth.createUserWithEmailAndPassword(email, password).await()
+            val user = result.user
+
+            val profile = userProfileChangeRequest {
+                displayName = name
+            }
+            user?.updateProfile(profile)?.await()
             AuthDto(isSucess = true, "")
         } catch (e: Exception) {
             AuthDto(isSucess = false, "${e.message}")
@@ -32,7 +39,7 @@ class ApiImpl(val auth: FirebaseAuth) : ApiService {
         return try {
             val result = auth.fetchSignInMethodsForEmail(email).await()
             val methods = result.signInMethods
-            if (!methods.isNullOrEmpty()) {
+            if (methods.isNullOrEmpty()) {
                 auth.sendPasswordResetEmail(email).await()
                 RecoverDto(isSuccess = true, message = "")
             } else {

@@ -4,6 +4,7 @@ import android.view.View
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.shekinah.data.api.fireauth.ApiService
 import com.example.shekinah.data.model.Pray
 import com.example.shekinah.domain.usecase.database.DbUseCase
 import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCase
@@ -14,11 +15,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ListPrayViewModel(private val dbUseCase: DbUseCase) : ViewModel() {
+class ListPrayViewModel(private val dbUseCase: DbUseCase, private val auth: AuthUseCase) : ViewModel() {
+
     private val _state = MutableStateFlow(ListState())
     val state = _state
 
     init {
+        getUserName()
         viewModelScope.launch {
             dbUseCase.recoverPray().collect { listPrays ->
                 _state.update { currentState ->
@@ -26,5 +29,10 @@ class ListPrayViewModel(private val dbUseCase: DbUseCase) : ViewModel() {
                 }
             }
         }
+
+    }
+    private fun getUserName() {
+        val name = auth.getCurrentUserName()
+        _state.update { it.copy(userName = name ?: "Usuário") }
     }
 }

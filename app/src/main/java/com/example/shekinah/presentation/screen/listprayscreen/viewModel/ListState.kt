@@ -5,5 +5,6 @@ import com.example.shekinah.data.model.Pray
 
 data class ListState (
    val list : List<Pray> = emptyList(),
+   val userName: String = ""
 
    )

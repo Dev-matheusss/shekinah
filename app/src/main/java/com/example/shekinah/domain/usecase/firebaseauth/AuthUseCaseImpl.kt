@@ -5,8 +5,13 @@ import com.example.shekinah.data.repository.firebaseauth.RepositoryAuth
 import com.example.shekinah.domain.model.Auth
 
 class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
-    override suspend fun register(email: String, password: String): Auth {
-        val result = repository.register(email, password)
+
+    override fun getCurrentUserName(): String? {
+        return repository.getCurrentUserName()
+    }
+
+    override suspend fun register(email: String, password: String,name: String): Auth {
+        val result = repository.register(email, password, name)
         return if (result.isSucess) {
             Auth(isSuccsess = true, message = "Bem vindo")
         } else {
@@ -82,10 +87,6 @@ class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
 
                 "The email address is badly formatted." -> {
                     RecoverDto(message = "Email não é válido")
-                }
-
-                "The supplied auth credential is incorrect, malformed or has expired." -> {
-                    RecoverDto(message = "Email ou senha incorreto")
                 }
 
                 "A network error (such as timeout, interrupted connection or unreachable host) has occurred." -> {

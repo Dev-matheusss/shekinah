@@ -12,12 +12,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +42,7 @@ import com.example.shekinah.R
 import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.presentation.navigation.CreateAcountRouts
 import com.example.shekinah.presentation.navigation.ListPrayRouts
+import com.example.shekinah.presentation.navigation.RecoverPasswordRouts
 import com.example.shekinah.presentation.screen.loginscreen.viewmodel.LoginViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -113,25 +124,50 @@ fun LoginScreen(
                     },
                     textStyle = TextStyle(color = Color.White)
                 )
+                var passwordVisible by remember { mutableStateOf(false) }
                 OutlineTextFieldComp(
                     value = state.password,
                     onValueChange = { newPassword ->
                         passwordChange(newPassword)
                     },
-                    visualTransformation = PasswordVisualTransformation(),
+                    visualTransformation = if (passwordVisible) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
                     label = {
                         Text(
                             text = stringResource(R.string.password_input),
                             style = TextStyle(color = Color.White)
                         )
                     },
+                    trailingIcon = {
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(
+                                painter = painterResource(
+                                    if (passwordVisible)
+                                        R.drawable.outline_password_sample
+                                    else
+                                        R.drawable.outline_password_hidden
+                                ),
+                                contentDescription = if (passwordVisible) "Esconder senha" else "Mostrar senha",
+                                tint = Color.White
+                            )
+                        }
+                    },
                     textStyle = TextStyle(color = Color.White),
                 )
-                Text(text = "Esqueceu sua senha?", style = TextStyle(Color.White), modifier = Modifier
-                    .clickable(onClick = {})
-                    .padding(end = 12.dp)
-                    .fillMaxWidth()
-                    .wrapContentWidth(Alignment.End))
+
+
+                Text(
+                    text = "Esqueceu sua senha?",
+                    style = TextStyle(Color.White),
+                    modifier = Modifier
+                        .clickable { navigateTo(RecoverPasswordRouts) }
+                        .padding(end = 12.dp)
+                        .fillMaxWidth()
+                        .wrapContentWidth(Alignment.End)
+                )
 
 
                 state.result?.message?.let {
@@ -149,7 +185,11 @@ fun LoginScreen(
                         .padding(horizontal = 12.dp)
                         .fillMaxWidth()
                         .background(color = Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Black.copy(
+                            alpha = 0.8f
+                        )
+                    )
                 ) {
                     Text(text = stringResource(R.string.enter_button))
                 }
@@ -164,15 +204,15 @@ fun LoginScreen(
                     modifier = Modifier
                         .clickable { navigateTo(CreateAcountRouts) }
                 )
+
             }
         }
     }
 }
 
-
-@Preview
+@Preview(showBackground = true)
 @Composable
-private fun LoginScreenPreview() {
+fun LoginScreenPreview() {
     LoginScreen(
         state = LoginState("matheus@gmail.com", "senha123"),
         emailChange = {},
@@ -180,5 +220,4 @@ private fun LoginScreenPreview() {
         onClickSingIn = { _, _ -> },
         navigateTo = {}
     )
-
 }

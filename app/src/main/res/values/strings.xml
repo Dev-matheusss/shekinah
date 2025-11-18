@@ -12,7 +12,6 @@
     <string name="continue_with_google">Continue com o google</string>
     //PlaceOrderScreen Strings
     <string name="place_your_order_here">Faça seu pedido aqui.</string>
-    <string name="tilte_input">Título</string>
     <string name="description_input">Descrição</string>
     <string name="save_pray">Salvar oração</string>
 </resources>

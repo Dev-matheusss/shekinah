@@ -12,9 +12,9 @@ class RegisterViewModel(val useCase: AuthUseCase) : ViewModel() {
 
     var registerState = MutableStateFlow(RegisterState())
 
-    fun register(email: String, password: String){
+    fun register(email: String, password: String, name: String){
             viewModelScope.launch(Dispatchers.IO) {
-                val result = useCase.register(email, password)
+                val result = useCase.register(email, password, name )
                 registerState.update {
                     it.copy(result = result)
                 }

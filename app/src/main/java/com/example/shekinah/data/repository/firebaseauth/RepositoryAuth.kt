@@ -4,7 +4,8 @@ import com.example.shekinah.data.model.AuthDto
 import com.example.shekinah.data.model.RecoverDto
 
 interface RepositoryAuth {
-    suspend fun register( email: String, password: String): AuthDto
+    suspend fun register( email: String, password: String, name: String): AuthDto
+    fun getCurrentUserName(): String?
 
     suspend fun singIn(email: String, password: String): AuthDto
 

@@ -41,7 +41,8 @@ fun OutlineTextFieldComp(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource? = null,
     shape: Shape = OutlinedTextFieldDefaults.shape,
-    colors: TextFieldColors = OutlinedTextFieldDefaults.colors()
+    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+
 ){
     OutlinedTextField(
         value = value,
@@ -49,6 +50,8 @@ fun OutlineTextFieldComp(
         label = label,
         textStyle = textStyle,
         visualTransformation = visualTransformation,
+        trailingIcon = trailingIcon,
+        maxLines = maxLines,
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp)

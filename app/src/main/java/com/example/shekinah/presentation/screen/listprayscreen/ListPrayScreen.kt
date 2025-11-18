@@ -108,7 +108,7 @@ fun ListPrayScreen(
                                 )
                                 Column {
                                     Text(
-                                        item.title,
+                                        item.name,
                                         style = TextStyle(color = Color.Black, fontSize = 18.sp),
                                         modifier = Modifier.padding(start = 8.dp, top = 8.dp)
                                     )

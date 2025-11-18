@@ -54,8 +54,8 @@ fun PlaceOrderRout(
         descriptionChange = {
             viewlModel.descriptionChange(it)
         },
-        onClickSavePray = { title, description ->
-            viewlModel.savePray(title, description)
+        onClickSavePray = { title, description, name ->
+            viewlModel.savePray(title, description, name)
         },
         navigateTo = navigateTo
     )
@@ -66,7 +66,7 @@ fun PlaceOrderScreen(
     state: PlaceOrderState,
     titleChange: (String) -> Unit,
     descriptionChange: (String) -> Unit,
-    onClickSavePray: (title: String, description: String) -> Unit,
+    onClickSavePray: (title: String, description: String, name: String) -> Unit,
     navigateTo: (Any) -> Unit
 ) {
     var errorMessage by remember { mutableStateOf("") }
@@ -103,7 +103,7 @@ fun PlaceOrderScreen(
                     },
                     label = {
                         Text(
-                            text = stringResource(R.string.tilte_input),
+                            text = stringResource(R.string.name_input),
                             style = TextStyle(color = Color.White)
                         )
                     },
@@ -114,6 +114,7 @@ fun PlaceOrderScreen(
                     onValueChange = { newDescription ->
                         descriptionChange(newDescription)
                     },
+                    maxLines = 34,
                     label = {
                         Text(
                             text = stringResource(R.string.description_input),
@@ -131,7 +132,7 @@ fun PlaceOrderScreen(
                 }
                 Button(
                     onClick = {
-                        onClickSavePray(state.title, state.description)
+                        onClickSavePray(state.title, state.description, state.name )
                         if (state.title.isNotEmpty() && state.description.isNotEmpty()) {
                             navigateTo(ListPrayRouts)
                         } else {

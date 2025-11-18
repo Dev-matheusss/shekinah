@@ -3,6 +3,7 @@ package com.example.shekinah.data.api.firestore
 import android.util.Log
 import com.example.shekinah.data.model.Pray
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,11 +13,14 @@ import kotlinx.coroutines.tasks.await
 class FireStoreImpl(private val fireStore: FirebaseFirestore) : FireStore {
     val _allPrays = MutableStateFlow<MutableList<Pray>>(mutableListOf())
     val allPrays: StateFlow<MutableList<Pray>> = _allPrays
+    val user = FirebaseAuth.getInstance().currentUser
+    val userName = user?.displayName ?: "Usuário"
 
-    override suspend fun savePray(title: String, description: String) {
+    override suspend fun savePray(title: String, description: String, name: String) {
         val colletion = fireStore.collection("prays")
         val docRef = colletion.document()
         val prayMap = hashMapOf(
+            "name" to userName,
             "id" to docRef.id,
             "title" to title,
             "description" to description,

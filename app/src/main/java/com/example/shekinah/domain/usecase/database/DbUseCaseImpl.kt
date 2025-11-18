@@ -5,9 +5,9 @@ import com.example.shekinah.data.repository.database.RepositoryDb
 import kotlinx.coroutines.flow.Flow
 
 class DbUseCaseImpl(private val repository: RepositoryDb) : DbUseCase {
-    override suspend fun savePray(title: String, description: String) {
+    override suspend fun savePray(title: String, description: String, name: String) {
         return if (title.isNotEmpty() && description.isNotEmpty()) {
-            repository.savePray(title, description)
+            repository.savePray(title, description, name)
         } else {
         }
     }

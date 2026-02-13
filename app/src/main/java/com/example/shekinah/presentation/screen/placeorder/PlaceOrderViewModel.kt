@@ -2,13 +2,13 @@ package com.example.shekinah.presentation.screen.placeorder
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shekinah.domain.usecase.database.DbUseCase
+import com.example.shekinah.domain.usecase.database.FirestoreUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class PlaceOrderViewModel(private val useCase: DbUseCase) : ViewModel() {
+class PlaceOrderViewModel(private val useCase: FirestoreUseCase) : ViewModel() {
     var placeOrderState = MutableStateFlow(PlaceOrderState())
     fun savePray(title: String, description: String, name: String) {
         viewModelScope.launch(Dispatchers.IO) {

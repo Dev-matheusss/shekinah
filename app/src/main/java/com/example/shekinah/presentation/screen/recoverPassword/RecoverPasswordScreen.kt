@@ -23,19 +23,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.shekinah.R
+import com.example.shekinah.components.ButtonComp
+import com.example.shekinah.components.OutlineTextFieldComp
+
 @Composable
 fun RecoverPasswordRoute(
     navigateTo: (Any) -> Unit,
     state: RecoverPasswordState,
     emailChange: (String) -> Unit,
-    onClickRecover:(email: String)-> Unit
+    onClickRecover: (email: String) -> Unit
 
-){
+) {
     RecoverPasswordScreen(
         navigateTo = navigateTo,
         state = state,
         emailChange = emailChange,
-        onClickRecover = onClickRecover)
+        onClickRecover = onClickRecover
+    )
 
 }
 
@@ -43,7 +47,7 @@ fun RecoverPasswordRoute(
 fun RecoverPasswordScreen(
     navigateTo: (Any) -> Unit,
     state: RecoverPasswordState,
-    emailChange:(String)-> Unit,
+    emailChange: (String) -> Unit,
     onClickRecover: (email: String) -> Unit
 ) {
     Box(
@@ -70,10 +74,10 @@ fun RecoverPasswordScreen(
                 verticalArrangement = spacedBy(8.dp, Alignment.CenterVertically)
             ) {
                 Text(text = "Recuperar Senha.", fontSize = 32.sp, color = Color.White)
-                OutlinedTextField(
+                OutlineTextFieldComp(
                     value = state.email,
-                    onValueChange = {newEmail ->
-                        emailChange (newEmail)
+                    onValueChange = { newEmail ->
+                        emailChange(newEmail)
                     },
                     label = {
                         Text(text = "Email de recuperação:", color = Color.White)
@@ -84,15 +88,15 @@ fun RecoverPasswordScreen(
                         .padding(horizontal = 12.dp)
                 )
                 state.message.let {
-                    Text(text = it,
-                        color = Color.Red)
+                    Text(
+                        text = it,
+                        color = Color.Red
+                    )
                 }
-                Button(
-                    onClick = {onClickRecover(state.email)},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent.copy(alpha = 0.8f))
+                ButtonComp(
+                    onClick = {
+                        onClickRecover(state.email)
+                    }
                 ) {
                     Text(text = "Enviar")
                 }
@@ -100,6 +104,7 @@ fun RecoverPasswordScreen(
         }
     }
 }
+
 @Composable
 @Preview(showBackground = true)
 fun RecoverPasswordPreview() {

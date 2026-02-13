@@ -12,10 +12,12 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.shekinah.R
 
 @Composable
 fun OutlineTextFieldComp(
@@ -52,6 +54,9 @@ fun OutlineTextFieldComp(
         visualTransformation = visualTransformation,
         trailingIcon = trailingIcon,
         maxLines = maxLines,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedBorderColor = colorResource(R.color.orange_mod)
+        ),
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp)

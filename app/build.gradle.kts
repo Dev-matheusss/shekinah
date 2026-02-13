@@ -44,6 +44,10 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.firebase.bom.v3470))
+    implementation(libs.firebase.storage)
+    implementation(libs.androidx.compose.runtime)
+
     //Testes Unitários
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -85,6 +89,8 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.androidx.navigation.compose)
     testImplementation(kotlin("test"))
+    //coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 
 
 }

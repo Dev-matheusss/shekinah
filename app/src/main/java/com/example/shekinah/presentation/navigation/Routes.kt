@@ -3,25 +3,27 @@ package com.example.shekinah.presentation.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-object CreateAcountRouts
+object RegisterScreenRout
 
 @Serializable
-object ListPrayRouts
+object ListPrayScreenRout
 
 @Serializable
-object LoginScreenRouts
+object LoginScreenRout
 
 @Serializable
-data class PrayDetailsRouts(
+data class PrayDetailsScreenRout(
     val id: String
 )
 
 
 @Serializable
-object PlaceOrderRouts
+object PlaceOrderScreenRout
 
 @Serializable
-object RecoverPasswordRouts
+object RecoverPassworScreendRout
 
+@Serializable
+object ProfileScreenRout
 
 

@@ -1,17 +1,21 @@
 package com.example.shekinah.domain.usecase.firebaseauth
 
+import android.net.Uri
 import com.example.shekinah.data.model.RecoverDto
-import com.example.shekinah.data.repository.firebaseauth.RepositoryAuth
+import com.example.shekinah.data.repository.firebaseauth.AuthRepository
 import com.example.shekinah.domain.model.Auth
 
-class AuthUseCaseImpl(private val repository: RepositoryAuth) : AuthUseCase {
+class AuthUseCaseImpl(private val repository: AuthRepository) : AuthUseCase {
+    override suspend fun logout(){
+         repository.logout()
+    }
 
     override fun getCurrentUserName(): String? {
         return repository.getCurrentUserName()
     }
 
-    override suspend fun register(email: String, password: String,name: String): Auth {
-        val result = repository.register(email, password, name)
+    override suspend fun register(email: String, password: String,name: String, imageUri: Uri): Auth {
+        val result = repository.register(email, password, name, imageUri)
         return if (result.isSucess) {
             Auth(isSuccsess = true, message = "Bem vindo")
         } else {

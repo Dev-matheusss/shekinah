@@ -1,20 +1,12 @@
 package com.example.shekinah.presentation.screen.placeorder
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,15 +20,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shekinah.R
+import com.example.shekinah.components.ButtonComp
 import com.example.shekinah.components.OutlineTextFieldComp
-import com.example.shekinah.data.model.Pray
-import com.example.shekinah.presentation.navigation.ListPrayRouts
-import com.example.shekinah.presentation.screen.listprayscreen.viewModel.ListState
-import com.example.shekinah.presentation.screen.placeorder.PlaceOrderViewModel
+import com.example.shekinah.presentation.navigation.ListPrayScreenRout
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -55,7 +44,7 @@ fun PlaceOrderRout(
             viewlModel.descriptionChange(it)
         },
         onClickSavePray = { title, description, name ->
-            viewlModel.savePray(title, description, name)
+            viewlModel.savePray(title, description, name )
         },
         navigateTo = navigateTo
     )
@@ -101,6 +90,7 @@ fun PlaceOrderScreen(
                     onValueChange = { newTitle ->
                         titleChange(newTitle)
                     },
+                    maxLines = 1,
                     label = {
                         Text(
                             text = stringResource(R.string.name_input),
@@ -130,23 +120,16 @@ fun PlaceOrderScreen(
                         modifier = Modifier.padding(top = 8.dp)
                     )
                 }
-                Button(
+                ButtonComp(
                     onClick = {
-                        onClickSavePray(state.title, state.description, state.name )
+                        onClickSavePray(state.title, state.description, state.name)
                         if (state.title.isNotEmpty() && state.description.isNotEmpty()) {
-                            navigateTo(ListPrayRouts)
+                            navigateTo(ListPrayScreenRout)
                         } else {
                             errorMessage = "Preencha todos os campos"
                         }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp)
-                        .background(color = Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Black.copy(alpha = 0.8f))
-                ) {
-                    Text(text = stringResource(R.string.save_pray))
-                }
+                    }
+                ) { Text(text = stringResource(R.string.save_pray)) }
             }
         }
     }

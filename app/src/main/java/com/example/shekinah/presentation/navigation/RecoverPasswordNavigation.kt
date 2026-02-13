@@ -10,7 +10,7 @@ import org.koin.androidx.compose.koinViewModel
 fun NavGraphBuilder.recoverPasswordScreen(
     navigateTo:(Any)-> Unit = {}
 ) {
-    composable<RecoverPasswordRouts> {
+    composable<RecoverPassworScreendRout> {
         val viewModel = koinViewModel<RecoverPasswordViewModel>()
         val state = viewModel.state.collectAsState().value
         RecoverPasswordRoute(

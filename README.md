@@ -2,6 +2,8 @@ Shekinah App
 Aplicativo Android desenvolvido para gerenciamento de pedidos de oração em igrejas, permitindo
 que usuários registrem pedidos, acompanhem avisos e gerenciem seu perfil. O projeto foi
 desenvolvido utilizando arquitetura moderna Android e integração com Firebase.
+
+
 Funcionalidades
 • Cadastro e login de usuários
 • Criação e listagem de pedidos de oração
@@ -17,6 +19,8 @@ Tecnologias
 • Firebase Storage
 • Koin (Dependency Injection)
 • Kotlin Coroutines
+
+
 Arquitetura
 O projeto segue o padrão MVVM, mantendo separação entre camadas e facilitando manutenção e
 testes.
@@ -27,6 +31,8 @@ testes.
 Testes
 • JUnit — testes unitários
 • Mockito — criação de mocks
+
+
 Executando o projeto
 git clone https://github.com/seu-usuario/shekinah.git
 Autor

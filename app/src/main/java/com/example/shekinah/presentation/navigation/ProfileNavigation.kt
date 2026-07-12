@@ -5,7 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.shekinah.presentation.screen.profile.ProfileRout
-import com.example.shekinah.presentation.screen.profile.ProfileViewModel
+import com.example.shekinah.presentation.screen.profile.viewmodel.ProfileViewModel
 import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.profileScreen(
@@ -13,12 +13,12 @@ fun NavGraphBuilder.profileScreen(
 ) {
     composable<ProfileScreenRout> {
         val viewModel = koinViewModel<ProfileViewModel>()
-        val state by viewModel.profileImageState.collectAsState()
+        val state by viewModel.profileState.collectAsState()
         ProfileRout(
             navigateTo = navigateTo,
             state = state,
-            onUploadImage = { uri ->
-                viewModel.uploadProfileImage(uri)
+            onSaveProfile = {newName, newUri ->
+                viewModel.updateProfile(newName, newUri)
             }
         )
     }

@@ -47,7 +47,7 @@ import com.example.shekinah.R
 import com.example.shekinah.components.ButtonComp
 import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.presentation.navigation.ListPrayScreenRout
-import com.example.shekinah.presentation.screen.profile.ProfileImageState
+import com.example.shekinah.presentation.screen.profile.viewmodel.ProfileState
 import com.example.shekinah.presentation.screen.register.viewmodel.RegisterState
 import com.example.shekinah.presentation.screen.register.viewmodel.RegisterViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -126,8 +126,8 @@ fun CreateAcountScreen(
         )
         Box() {
             when (state.imageState) {
-                is ProfileImageState.Success -> {
-                    val imageUrl = (state.imageState as ProfileImageState.Success).photoUrl
+                is ProfileState.Success -> {
+                    val imageUrl = (state.imageState as ProfileState.Success).photoUrl
                     Log.d("RegisterImage", "Imagem SUCCESS: $imageUrl")
                     Image(
                         painter = rememberAsyncImagePainter(model = imageUrl),
@@ -138,9 +138,9 @@ fun CreateAcountScreen(
                             .clip(CircleShape)
                     )
                 }
-                is ProfileImageState.Error -> {
+                is ProfileState.Error -> {
 
-                    val error = (state.imageState as ProfileImageState.Error).message
+                    val error = (state.imageState as ProfileState.Error).message
                     Log.e("RegisterImage", "Erro imagem: $error")
 
                     Image(
@@ -278,7 +278,7 @@ fun CreateAcountScreenPreview() {
             name = "Matheus",
             email = "matheus@gmail.com",
             password = "123456",
-            imageState = ProfileImageState.Idle
+            imageState = ProfileState.Idle
         ),
         nameChange = {},
         emailChange = {},

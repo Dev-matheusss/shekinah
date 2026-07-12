@@ -1,8 +1,8 @@
-package com.example.shekinah.presentation.screen.listprays.viewModel
+package com.example.shekinah.presentation.screen.listprays.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shekinah.domain.usecase.database.FirestoreUseCase
+import com.example.shekinah.domain.usecase.firestore.FirestoreUseCase
 import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -16,7 +16,7 @@ class ListPrayViewModel(private val dbUseCase: FirestoreUseCase, private val aut
 
     init {
         getUserName()
-        viewModelScope.launch {
+        viewModelScope.launch{
             dbUseCase.recoverPray().collect { listPrays ->
                 _state.update { currentState ->
                     currentState.copy(list = listPrays.toList())

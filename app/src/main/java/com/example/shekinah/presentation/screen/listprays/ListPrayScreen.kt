@@ -48,8 +48,9 @@ import com.example.shekinah.data.model.PrayDto
 import com.example.shekinah.presentation.navigation.LoginScreenRout
 import com.example.shekinah.presentation.navigation.PlaceOrderScreenRout
 import com.example.shekinah.presentation.navigation.ProfileScreenRout
-import com.example.shekinah.presentation.screen.listprays.viewModel.ListPrayViewModel
-import com.example.shekinah.presentation.screen.listprays.viewModel.ListState
+import com.example.shekinah.presentation.navigation.WarningsScreenRout
+import com.example.shekinah.presentation.screen.listprays.viewmodel.ListPrayViewModel
+import com.example.shekinah.presentation.screen.listprays.viewmodel.ListState
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -85,7 +86,9 @@ fun ListPrayScreen(
                         "profile" -> {
                             navigateTo(ProfileScreenRout)
                         }
-                        "config" -> {}
+                        "warnings" -> {
+                            navigateTo(WarningsScreenRout)
+                        }
                         "logout" -> {
                             viewModel.logout()
                             navigateTo(LoginScreenRout)

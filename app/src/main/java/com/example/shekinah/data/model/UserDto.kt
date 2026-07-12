@@ -1,3 +1,8 @@
-package com.example.shekinah.data.model
+package com.example.shekinah.data.m
 
-data class UserDto()
+data class UserDto(
+    val name: String = "",
+    val email: String = "",
+    val photoUrl: String = "",
+    val errorMessage: String? = null
+)

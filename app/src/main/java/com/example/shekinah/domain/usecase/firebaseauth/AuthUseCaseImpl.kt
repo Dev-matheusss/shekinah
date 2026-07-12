@@ -10,6 +10,8 @@ class AuthUseCaseImpl(private val repository: AuthRepository) : AuthUseCase {
          repository.logout()
     }
 
+
+
     override fun getCurrentUserName(): String? {
         return repository.getCurrentUserName()
     }
@@ -89,7 +91,7 @@ class AuthUseCaseImpl(private val repository: AuthRepository) : AuthUseCase {
                     RecoverDto(message = "Preencha o campo de email")
                 }
 
-                "The email address is badly formatted." -> {
+                "ERROR_INVALID_EMAIL" -> {
                     RecoverDto(message = "Email não é válido")
                 }
 

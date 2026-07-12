@@ -1,4 +1,4 @@
-package com.example.shekinah.presentation.screen.listprays.viewModel
+package com.example.shekinah.presentation.screen.listprays.viewmodel
 
 import com.example.shekinah.data.model.PrayDto
 

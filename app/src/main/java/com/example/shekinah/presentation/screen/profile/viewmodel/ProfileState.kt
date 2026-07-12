@@ -1,13 +1,12 @@
-package com.example.shekinah.presentation.screen.profile
+package com.example.shekinah.presentation.screen.profile.viewmodel
 
-sealed class ProfileImageState {
-    object Idle : ProfileImageState()
-    object Loading : ProfileImageState()
+sealed class ProfileState {
+    object Idle : ProfileState()
+    object Loading : ProfileState()
     data class Success(
         val name: String? = null,
-        val email: String? = null,
         val photoUrl: String?
-    ) : ProfileImageState()
-    data class Error(val message: String) : ProfileImageState()
+    ) : ProfileState()
+    data class Error(val message: String) : ProfileState()
 }
 

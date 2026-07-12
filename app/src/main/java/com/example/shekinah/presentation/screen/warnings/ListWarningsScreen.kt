@@ -33,11 +33,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.shekinah.R
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.shekinah.presentation.navigation.CreateWarningScreenRout
-import com.example.shekinah.presentation.navigation.PlaceOrderScreenRout
 import com.example.shekinah.presentation.screen.warnings.viewmodel.state.ListWarningsState
 
 @Composable
@@ -98,13 +99,16 @@ fun WarningScreen(
                                 .padding(all = 16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                painter = painterResource(R.drawable.background_app__1_),
-                                contentDescription = "",
+                            AsyncImage(
+                                model = item.imageUrl,
+                                placeholder = painterResource(R.drawable.nao),
+                                error = painterResource(R.drawable.background_app__1_),
+                                contentDescription = "imagem do aviso",
                                 modifier = Modifier
                                     .size(64.dp)
                                     .clip(CircleShape)
-                                    .border(1.dp, Color.White, CircleShape)
+                                    .border(1.dp, Color.White, CircleShape),
+                                contentScale = ContentScale.Crop
                             )
                             Spacer(modifier = Modifier.padding(horizontal = 10.dp))
                             Text(item.warning, style = TextStyle(Color.White))

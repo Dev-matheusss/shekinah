@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shekinah.domain.usecase.firebaseauth.AuthUseCase
 import com.example.shekinah.domain.usecase.storage.StorageUseCase
-import com.example.shekinah.presentation.screen.profile.ProfileImageState
+import com.example.shekinah.presentation.screen.profile.viewmodel.ProfileState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -20,7 +20,7 @@ class RegisterViewModel(val useCase: AuthUseCase, val storageUseCase: StorageUse
         registerState.update {
             it.copy(
                 imageUri = uri,
-                imageState = ProfileImageState.Success(photoUrl = uri.toString())
+                imageState = ProfileState.Success(photoUrl = uri.toString())
             )
         }
     }
@@ -28,7 +28,7 @@ class RegisterViewModel(val useCase: AuthUseCase, val storageUseCase: StorageUse
     fun uploadProfileImage(uri: Uri) {
         viewModelScope.launch {
             registerState.update {
-                it.copy(imageState = ProfileImageState.Loading,
+                it.copy(imageState = ProfileState.Loading,
                     imageUri = uri)
             }
 
@@ -36,12 +36,12 @@ class RegisterViewModel(val useCase: AuthUseCase, val storageUseCase: StorageUse
                 val url = storageUseCase.uploadProfileImage(uri)
 
                 registerState.update {
-                    it.copy(imageState = ProfileImageState.Success(photoUrl = url))
+                    it.copy(imageState = ProfileState.Success(photoUrl = url))
                 }
 
             } catch (e: Exception) {
                 registerState.update {
-                    it.copy(imageState = ProfileImageState.Error("Erro upload"))
+                    it.copy(imageState = ProfileState.Error("Erro upload"))
                 }
             }
         }

@@ -13,4 +13,5 @@ interface AuthUseCase {
     suspend fun recoverPassword(email: String): RecoverDto
 
     suspend fun logout()
+
 }

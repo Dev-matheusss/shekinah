@@ -4,6 +4,7 @@ import android.net.Uri
 import com.example.shekinah.data.api.ApiService
 import com.example.shekinah.data.model.AuthDto
 import com.example.shekinah.data.model.RecoverDto
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AuthDataSourceImpl(private val api: ApiService) : AuthDataSource {
 
@@ -21,6 +22,8 @@ class AuthDataSourceImpl(private val api: ApiService) : AuthDataSource {
     override suspend fun logout(){
         api.logout()
     }
+
+
 
 
 }

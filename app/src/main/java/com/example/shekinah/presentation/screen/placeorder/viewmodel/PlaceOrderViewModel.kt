@@ -1,2 +1,30 @@
-package com.example.shekinah.presentation.screen.placeorder.viewmodel 
+package com.example.shekinah.presentation.screen.placeorder.viewmodel
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.shekinah.domain.usecase.firestore.FirestoreUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+class PlaceOrderViewModel(private val useCase: FirestoreUseCase) : ViewModel() {
+    var placeOrderState = MutableStateFlow(PlaceOrderState())
+    fun savePray(title: String, description: String, name: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCase.savePray(title, description, name)
+        }
+    }
+
+    fun titleChange(title: String) {
+        placeOrderState.update {
+            it.copy(title = title)
+        }
+    }
+
+    fun descriptionChange(description: String){
+        placeOrderState.update {
+            it.copy(description = description)
+        }
+    }
+}

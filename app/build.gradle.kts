@@ -47,6 +47,7 @@ dependencies {
     implementation(platform(libs.firebase.bom.v3470))
     implementation(libs.firebase.storage)
     implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.room.ktx)
 
     //Testes Unitários
     testImplementation(libs.junit)

@@ -3,8 +3,8 @@ package com.example.shekinah.presentation.navigation
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.shekinah.presentation.screen.recoverPassword.RecoverPasswordRoute
-import com.example.shekinah.presentation.screen.recoverPassword.RecoverPasswordViewModel
+import com.example.shekinah.presentation.screen.recoverpassword.RecoverPasswordRoute
+import com.example.shekinah.presentation.screen.recoverpassword.RecoverPasswordViewModel
 import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.recoverPasswordScreen(

@@ -1,23 +1,17 @@
 package com.example.shekinah.presentation.screen.profile
 
 import android.net.Uri
-import android.Manifest
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.KeyboardOptions
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,30 +23,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.shekinah.components.ButtonComp
 import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.R
+import com.example.shekinah.presentation.navigation.ListPrayScreenRout
+import com.example.shekinah.presentation.screen.profile.viewmodel.ProfileState
 import rememberImagePicker
 
 @Composable
 fun ProfileRout(
     navigateTo: (Any) -> Unit,
-    state: ProfileImageState,
-    onUploadImage: (Uri) -> Unit
+    state: ProfileState,
+    onSaveProfile: (String, Uri?) -> Unit
 ) {
     ProfileScreen(
         navigateTo = navigateTo,
         state = state,
-        onUploadImage = onUploadImage
+        onSaveProfile = onSaveProfile
 
     )
 }
@@ -60,23 +52,20 @@ fun ProfileRout(
 @Composable
 fun ProfileScreen(
     navigateTo: (Any) -> Unit,
-    state: ProfileImageState,
-    onUploadImage: (Uri) -> Unit
+    state: ProfileState,
+    onSaveProfile: (String, Uri?) -> Unit
 ) {
- val openGallery = rememberImagePicker {uri ->
-     onUploadImage(uri)
- }
+    val selectedImageUri = remember { mutableStateOf<Uri?>(null) }
     val nameState = remember { mutableStateOf("") }
-    val emailState = remember { mutableStateOf("") }
-
-    LaunchedEffect(state) {
-        if (state is ProfileImageState.Success) {
-            nameState.value = state.name ?: ""
-            emailState.value = state.email ?: ""
-        }
+    val openGallery = rememberImagePicker { uri ->
+        selectedImageUri.value = uri
     }
 
-
+    LaunchedEffect(state) {
+        if (state is ProfileState.Success) {
+            nameState.value = state.name ?: ""
+        }
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -102,7 +91,7 @@ fun ProfileScreen(
                 verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically)
             ) {
                 when (state) {
-                    is ProfileImageState.Success -> {
+                    is ProfileState.Success -> {
                         Image(
                             painter = rememberAsyncImagePainter(model = state.photoUrl),
                             contentDescription = "Imagem de perfil",
@@ -124,19 +113,18 @@ fun ProfileScreen(
                         )
                     }
                 }
-                Text("Alterar imagem de perfil",
+                Text(
+                    "Alterar imagem de perfil",
                     style = TextStyle(Color.White),
                     modifier = Modifier
-                        .clickable{
+                        .clickable {
                             openGallery()
                         }
                 )
-
-
                 OutlineTextFieldComp(
                     modifier = Modifier.fillMaxWidth(),
                     value = nameState.value,
-                    onValueChange = {nameState.value = it},
+                    onValueChange = { nameState.value = it },
                     label = {
                         Text(
                             "Nome",
@@ -145,42 +133,32 @@ fun ProfileScreen(
                     },
                     textStyle = TextStyle(Color.White)
                 )
-
-                OutlineTextFieldComp(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = emailState.value,
-                    onValueChange = {emailState.value = it},
-                    label = { Text("E-mail",
-                        style = TextStyle(Color.White)) },
-                    textStyle = TextStyle(Color.White),
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
-                )
-
                 ButtonComp(
-                    onClick = { },
+                    onClick = {
+                        onSaveProfile(nameState.value, selectedImageUri.value)
+                        navigateTo(ListPrayScreenRout)
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Salvar")
                 }
             }
-
         }
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ProfilePreview() {
-
-    val fakeState = ProfileImageState.Success(name = "", email = "",
+    val fakeState = ProfileState.Success(
+        name = "João Silva",
         photoUrl = "https://via.placeholder.com/150"
     )
-
     ProfileScreen(
         navigateTo = {},
         state = fakeState,
-        onUploadImage = {}
+        onSaveProfile = { name, uri ->
+        }
     )
 }
 

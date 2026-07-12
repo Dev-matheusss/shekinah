@@ -26,4 +26,12 @@ object RecoverPassworScreendRout
 @Serializable
 object ProfileScreenRout
 
+@Serializable
+object WarningsScreenRout
+
+@Serializable
+object CreateWarningScreenRout
+
+
+
 

@@ -26,6 +26,8 @@ import com.example.shekinah.R
 import com.example.shekinah.components.ButtonComp
 import com.example.shekinah.components.OutlineTextFieldComp
 import com.example.shekinah.presentation.navigation.ListPrayScreenRout
+import com.example.shekinah.presentation.screen.placeorder.viewmodel.PlaceOrderState
+import com.example.shekinah.presentation.screen.placeorder.viewmodel.PlaceOrderViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -93,7 +95,7 @@ fun PlaceOrderScreen(
                     maxLines = 1,
                     label = {
                         Text(
-                            text = stringResource(R.string.name_input),
+                            text = stringResource(R.string.title_input),
                             style = TextStyle(color = Color.White)
                         )
                     },

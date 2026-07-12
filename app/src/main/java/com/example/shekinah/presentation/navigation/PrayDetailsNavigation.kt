@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.example.shekinah.presentation.screen.praydetails.PrayDetailsViewModel
+import com.example.shekinah.presentation.screen.praydetails.viewmodel.PrayDetailsViewModel
 import com.example.shekinah.presentation.screen.praydetails.PrayRoute
 import org.koin.androidx.compose.koinViewModel
 

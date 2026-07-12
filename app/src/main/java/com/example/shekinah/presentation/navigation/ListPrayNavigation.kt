@@ -4,7 +4,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.shekinah.presentation.screen.listprays.ListRoute
-import com.example.shekinah.presentation.screen.listprays.viewModel.ListPrayViewModel
+import com.example.shekinah.presentation.screen.listprays.viewmodel.ListPrayViewModel
 import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.listScreen(

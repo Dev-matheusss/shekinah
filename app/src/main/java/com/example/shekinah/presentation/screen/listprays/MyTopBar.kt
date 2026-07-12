@@ -67,7 +67,7 @@ fun MyTopBar(
                         text = {Text("Avisos")},
                         onClick = {
                             menuExpanded = false
-                            onMenuOption("avisos")
+                            onMenuOption("warnings")
                         }
                     )
                     DropdownMenuItem(

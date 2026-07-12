@@ -1,4 +1,4 @@
-package com.example.shekinah.presentation.screen.recoverPassword
+package com.example.shekinah.presentation.screen.recoverpassword
 
 data class RecoverPasswordState(
     val email: String = "",
